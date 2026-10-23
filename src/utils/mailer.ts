@@ -4,7 +4,8 @@
  * 1. Alberto Hernández Gudino (ahgudino@usal.es)
  * 2. Pilar Poveda Bueno - Responsable de Prácticas formativas (ppoveda@usal.es)
  *
- * Envío: Cloudflare Email Service (binding `EMAIL` en wrangler.toml), remitente mastercyl@fundacionusal.es.
+ * Envío: Cloudflare Email Routing (binding `EMAIL` en wrangler.toml), remitente avisos@mastercyl.fundacionusal.es
+ * (subdominio con Email Routing; el correo principal @fundacionusal.es sigue en Google).
  * En el plan gratuito solo se puede enviar a direcciones verificadas en Email Routing:
  * si se añade un destinatario aquí, hay que añadirlo también en wrangler.toml y verificarlo en Cloudflare.
  */
@@ -19,7 +20,7 @@ export const DESTINATARIOS_OFICIALES: Destinatario[] = [
   { nombre: 'Pilar Poveda Bueno', email: 'ppoveda@usal.es' }
 ];
 
-export const REMITENTE = { email: 'mastercyl@fundacionusal.es', name: 'Becas MásterCyL (FGUSAL)' };
+export const REMITENTE = { email: 'avisos@mastercyl.fundacionusal.es', name: 'Becas MásterCyL (FGUSAL)' };
 
 export interface DatosSolicitudEmail {
   codigo: string;
