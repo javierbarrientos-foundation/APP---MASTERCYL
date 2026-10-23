@@ -1,5 +1,14 @@
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
+export const usuarios = sqliteTable('usuarios', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  email: text('email').notNull().unique(),
+  nombre: text('nombre').notNull(),
+  rol: text('rol').notNull().default('gestor'),
+  activo: integer('activo').notNull().default(1),
+  createdAt: text('created_at').notNull(),
+});
+
 export const solicitudes = sqliteTable('solicitudes', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   codigo: text('codigo').notNull().unique(),
@@ -34,6 +43,8 @@ export const mensajesContacto = sqliteTable('mensajes_contacto', {
   createdAt: text('created_at').notNull(),
 });
 
+export type Usuario = typeof usuarios.$inferSelect;
+export type NuevoUsuario = typeof usuarios.$inferInsert;
 export type Solicitud = typeof solicitudes.$inferSelect;
 export type NuevaSolicitud = typeof solicitudes.$inferInsert;
 export type MensajeContacto = typeof mensajesContacto.$inferSelect;
