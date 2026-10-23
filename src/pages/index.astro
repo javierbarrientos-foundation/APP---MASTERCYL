@@ -518,6 +518,7 @@ import PreinscripcionModal from '../components/PreinscripcionModal.astro';
             cuentaBancaria: formData.get('cuentaBancaria'),
             composicionFamiliar: formData.get('composicion_familiar'),
             lugarFirma: formData.get('lugarFirma'),
+            politicaPrivacidad: document.getElementById('pre-check-privacidad')?.checked || false,
             familiares
           };
 

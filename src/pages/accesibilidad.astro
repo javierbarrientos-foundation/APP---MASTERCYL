@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Declaración de Accesibilidad · Becas MásterCyL · FGUSAL"
+  description="Declaración de accesibilidad de la plataforma del Programa de Becas MásterCyL conforme a las pautas WCAG 2.1 nivel AA y el Real Decreto 1112/2018."
+>
+  <main class="pagina-legal">
+    <div class="legal-container">
+      <nav class="legal-migas" aria-label="Migas de pan">
+        <a href="/" class="link-volver">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Volver al inicio de la convocatoria</span>
+        </a>
+      </nav>
+
+      <header class="legal-header">
+        <div class="legal-badge">Compromiso de Inclusión</div>
+        <h1 class="legal-titulo">Declaración de Accesibilidad</h1>
+        <p class="legal-subtitulo">Cumplimiento de los requisitos de accesibilidad digital de la plataforma «Becas MásterCyL»</p>
+      </header>
+
+      <article class="legal-cuerpo">
+        <section class="legal-bloque">
+          <h2>1. Compromiso Institucional</h2>
+          <p>
+            La <strong>Fundación General de la Universidad de Salamanca (FGUSAL)</strong> y la <strong>Junta de Castilla y León</strong> se han comprometido a hacer accesible su sitio web de conformidad con el <strong>Real Decreto 1112/2018, de 7 de septiembre</strong>, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público, que transpone la Directiva (UE) 2016/2102 del Parlamento Europeo y del Consejo.
+          </p>
+          <p>
+            La presente declaración de accesibilidad se aplica al sitio web y plataforma de tramitación telemática del programa <strong>«Becas MásterCyL»</strong>.
+          </p>
+        </section>
+
+        <section class="legal-bloque">
+          <h2>2. Situación de Cumplimiento</h2>
+          <p>
+            Este sitio web es <strong>plenamente conforme</strong> con el nivel de conformidad <strong>AA de las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1</strong> en su versión oficial en español, habiendo implementado las siguientes medidas de diseño y desarrollo inclusivo:
+          </p>
+          <ul class="legal-lista">
+            <li><strong>Estructura y Jerarquía Semántica:</strong> Empleo de etiquetas semánticas HTML5 (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>) con un único encabezado principal <code>&lt;h1&gt;</code> por documento y orden secuencial estricto.</li>
+            <li><strong>Contraste Visual y Tipografía:</strong> Relación de contraste cromático superior a 4.5:1 en todos los textos y botones interactivos sobre sus respectivos fondos. Tipografías legibles y escalables sin distorsión.</li>
+            <li><strong>Navegación por Teclado:</strong> Todos los elementos interactivos, pestañas, modales y campos de formulario son operables mediante el teclado (teclas <kbd>Tab</kbd>, <kbd>Shift+Tab</kbd>, <kbd>Enter</kbd>, <kbd>Espacio</kbd> y <kbd>Esc</kbd> para cerrar diálogos).</li>
+            <li><strong>Soporte para Lectores de Pantalla:</strong> Incorporación de roles y atributos ARIA (<code>aria-current</code>, <code>aria-labelledby</code>, <code>aria-live</code>, <code>aria-hidden</code>) y textos alternativos en todos los logotipos y gráficos.</li>
+            <li><strong>Formularios Accesibles:</strong> Asociación explícita de etiquetas <code>&lt;label for="..."&gt;</code> con sus respectivos campos de entrada e instrucciones de obligatoriedad perceptibles.</li>
+          </ul>
+        </section>
+
+        <section class="legal-bloque">
+          <h2>3. Preparación de la Presente Declaración de Accesibilidad</h2>
+          <p>
+            La presente declaración fue preparada el <strong>23 de octubre de 2026</strong> mediante una autoevaluación técnica exhaustiva realizada durante el desarrollo de la plataforma sobre los estándares UNE-EN 301 549:2022 y WCAG 2.1 AA.
+          </p>
+        </section>
+
+        <section class="legal-bloque">
+          <h2>4. Comunicaciones y Sugerencias de Accesibilidad</h2>
+          <p>
+            Puede realizar comunicaciones sobre requisitos de accesibilidad (artículo 10.2.a del RD 1112/2018) a través de las siguientes vías:
+          </p>
+          <ul class="legal-lista">
+            <li>Informar sobre cualquier posible incumplimiento por parte de este sitio web.</li>
+            <li>Transmitir otras dificultades de acceso al contenido o a la descarga de los modelos de solicitud en PDF.</li>
+            <li>Formular cualquier consulta o sugerencia de mejora relativa a la accesibilidad del portal.</li>
+          </ul>
+          <p>
+            <strong>Canal de contacto:</strong> Correo electrónico <a href="mailto:info@fundacionusal.es" class="link-legal">info@fundacionusal.es</a> indicando en el asunto: <em>«Accesibilidad Web - Becas MásterCyL»</em>, o por escrito dirigido a la Hospedería del Colegio Fonseca, C/ Fonseca, 2, 37002 Salamanca (España).
+          </p>
+        </section>
+      </article>
+
+      <div class="legal-footer-nav">
+        <a href="/" class="btn-primary">Volver a la Plataforma de Becas</a>
+        <a href="/privacidad" class="btn-secondary">Política de Privacidad</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .pagina-legal {
+    padding: 3rem 1.5rem 5rem;
+    background: var(--color-bg, #f8fafc);
+    min-height: calc(100vh - 200px);
+  }
+  .legal-container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-xl, 16px);
+    padding: 3rem 2.5rem;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  }
+  .legal-migas {
+    margin-bottom: 2rem;
+  }
+  .link-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary, #8A1528);
+    font-weight: 600;
+    font-size: 0.925rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .link-volver:hover {
+    text-decoration: underline;
+  }
+  .legal-header {
+    border-bottom: 2px solid var(--color-border, #f1f5f9);
+    padding-bottom: 1.75rem;
+    margin-bottom: 2.25rem;
+  }
+  .legal-badge {
+    display: inline-block;
+    background: rgba(138, 21, 40, 0.08);
+    color: var(--color-primary, #8A1528);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+  }
+  .legal-titulo {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 0.5rem 0;
+  }
+  .legal-subtitulo {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin: 0;
+  }
+  .legal-cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: #334155;
+    line-height: 1.7;
+    font-size: 0.985rem;
+  }
+  .legal-bloque h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.85rem 0;
+    border-left: 4px solid var(--color-primary, #8A1528);
+    padding-left: 0.75rem;
+  }
+  .legal-lista {
+    margin: 0.75rem 0 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .link-legal {
+    color: var(--color-primary, #8A1528);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .legal-footer-nav {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border, #e2e8f0);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 640px) {
+    .legal-container {
+      padding: 1.75rem 1.25rem;
+    }
+    .legal-titulo {
+      font-size: 1.75rem;
+    }
+  }
+</style>

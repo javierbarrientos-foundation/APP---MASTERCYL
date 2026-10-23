@@ -31,6 +31,9 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="es_ES" />
     
+    <!-- Cloudflare Turnstile (Protección antispam/anti-bots) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
     <title>{title}</title>
   </head>
   <body>
@@ -107,6 +110,7 @@ const {
             <li><a href="/aviso-legal">Aviso Legal</a></li>
             <li><a href="/privacidad">Política de Privacidad (RGPD)</a></li>
             <li><a href="/cookies">Política de Cookies</a></li>
+            <li><a href="/accesibilidad">Declaración de Accesibilidad</a></li>
             <li><a href="https://fundacion.usal.es/portal-de-transparencia/" target="_blank" rel="noopener noreferrer">Portal de Transparencia</a></li>
           </ul>
         </div>
@@ -125,6 +129,8 @@ const {
             <a href="/privacidad">Privacidad</a>
             <span aria-hidden="true">·</span>
             <a href="/cookies">Cookies</a>
+            <span aria-hidden="true">·</span>
+            <a href="/accesibilidad">Accesibilidad</a>
           </div>
         </div>
       </div>

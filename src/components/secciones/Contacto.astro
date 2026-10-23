@@ -151,6 +151,21 @@
             <span class="form-helper">Indica tus datos para una respuesta personalizada</span>
           </div>
 
+          <!-- Casilla de Privacidad RGPD -->
+          <div class="form-grupo-check" style="margin: 1rem 0; font-size: 0.85rem; color: #475569;">
+            <label style="display: flex; align-items: flex-start; gap: 0.65rem; cursor: pointer;">
+              <input type="checkbox" id="privacidad-contacto" required style="margin-top: 0.2rem;" />
+              <span>
+                He leído y acepto la <a href="/privacidad" target="_blank" style="color: var(--color-primary); font-weight: 600; text-decoration: underline;">Política de Privacidad</a> y consiento el tratamiento de mis datos por parte de FGUSAL para la resolución de esta consulta. <strong style="color: #dc2626;">*</strong>
+              </span>
+            </label>
+          </div>
+
+          <!-- Contenedor Cloudflare Turnstile (Protección antibot) -->
+          <div class="turnstile-wrap" style="margin-bottom: 1rem; display: flex; justify-content: center;">
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAAxxxxxxxxxxxxxx" data-theme="light"></div>
+          </div>
+
           <!-- Botón de Envío -->
           <button type="submit" class="form-btn-submit" style="margin-top: 0.5rem;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>

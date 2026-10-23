@@ -179,10 +179,10 @@ import { masteresUsal } from '../data/masteresUsal';
         <div class="form-grupo" style="margin-top: 1rem;">
           <label for="pre-cuenta" class="form-label">
             <span>N.º CUENTA CORRIENTE DE LA QUE ES TITULAR EN ESPAÑA (IBAN):</span>
-            <span class="badge-opcional">Si ya dispone de ella</span>
+            <span class="badge-opcional">Opcional en preinscripción</span>
           </label>
           <input type="text" id="pre-cuenta" name="cuentaBancaria" class="form-input" placeholder="ES00 0000 0000 0000 0000 0000" />
-          <span class="form-helper">Necesario para el abono de la dotación económica tras la adjudicación definitiva.</span>
+          <span class="form-helper">Dato no obligatorio en esta fase inicial. Conforme al principio de minimización del RGPD, únicamente se exigirá a las personas que resulten definitivamente adjudicatarias de la beca para formalizar el abono bancario.</span>
         </div>
       </div>
 
@@ -306,9 +306,24 @@ import { masteresUsal } from '../data/masteresUsal';
             </tr>
             <tr>
               <th>Derechos</th>
-              <td>Acceso, rectificación, supresión y demás derechos reconocidos ante FGUSAL (fonseca@usal.es).</td>
+              <td>Acceso, rectificación, supresión y demás derechos reconocidos ante FGUSAL (info@fundacionusal.es).</td>
             </tr>
           </table>
+        </div>
+
+        <!-- Casilla obligatoria de lectura y aceptación de la Política de Privacidad -->
+        <div class="form-privacidad-check" style="margin-top: 1.25rem; padding: 1rem 1.25rem; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px;">
+          <label class="check-label" style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" id="pre-check-privacidad" name="politicaPrivacidad" required style="margin-top: 0.25rem;" />
+            <span style="font-size: 0.875rem; color: #1e293b; line-height: 1.5;">
+              He leído y acepto la <a href="/privacidad" target="_blank" style="color: #8A1528; text-decoration: underline; font-weight: 600;">Política de Privacidad</a> y autorizo el tratamiento de mis datos personales y académicos por parte de la Fundación General de la Universidad de Salamanca (FGUSAL) y la Consejería de la Presidencia de la Junta de Castilla y León para la instrucción, baremación y resolución de la convocatoria del programa Becas MásterCyL conforme al RGPD (UE) 2016/679. <span style="color: #dc2626; font-weight: 700;">* Obligatorio</span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Protección antibot Cloudflare Turnstile -->
+        <div class="turnstile-container" style="margin-top: 1rem; display: flex; justify-content: center;">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAAxxxxxxxxxxxxxx" data-theme="light"></div>
         </div>
       </div>
 
