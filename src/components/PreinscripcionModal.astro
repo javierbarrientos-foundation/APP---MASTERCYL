@@ -1,0 +1,243 @@
+---
+---
+
+<dialog id="modal-preinscripcion" class="modal-dialog" aria-labelledby="modal-titulo">
+  <div class="modal-contenedor">
+    <div class="modal-header">
+      <div class="modal-header__meta">
+        <span class="modal-tag">Convocatoria Oficial 2026-2027</span>
+        <h2 id="modal-titulo" class="modal-titulo">Plataforma Becas MásterCyL</h2>
+      </div>
+      <button type="button" id="btn-cerrar-modal" class="modal-cerrar" aria-label="Cerrar modal">&times;</button>
+    </div>
+
+    <!-- Pestañas internas del modal -->
+    <div class="modal-pestanas">
+      <button type="button" id="tab-modal-nuevo" class="tab-modal activo">Nueva Preinscripción</button>
+      <button type="button" id="tab-modal-consulta" class="tab-modal">Consultar Estado</button>
+    </div>
+
+    <!-- Formulario 1: Nueva Preinscripción -->
+    <div id="panel-modal-nuevo" class="modal-panel">
+      <p class="modal-desc">
+        Cumplimenta los datos iniciales para generar tu número de expediente de preinscripción en la Universidad de León.
+      </p>
+
+      <form id="form-preinscripcion" class="form-modal">
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label for="pre-nombre" class="form-label">Nombre *</label>
+            <input type="text" id="pre-nombre" name="nombre" class="form-input" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-grupo">
+            <label for="pre-apellidos" class="form-label">Apellidos *</label>
+            <input type="text" id="pre-apellidos" name="apellidos" class="form-input" placeholder="Tus apellidos" required />
+          </div>
+        </div>
+
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label for="pre-dni" class="form-label">DNI o Pasaporte Español *</label>
+            <input type="text" id="pre-dni" name="dniPasaporte" class="form-input" placeholder="Ej. 12345678Z o Pasaporte" required />
+          </div>
+          <div class="form-grupo">
+            <label for="pre-email" class="form-label">Correo Electrónico *</label>
+            <input type="email" id="pre-email" name="email" class="form-input" placeholder="tu.correo@ejemplo.com" required />
+          </div>
+        </div>
+
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label for="pre-pais" class="form-label">País de Residencia en Hispanoamérica *</label>
+            <input type="text" id="pre-pais" name="paisResidencia" class="form-input" placeholder="Ej. Argentina, México, Colombia..." required />
+          </div>
+          <div class="form-grupo">
+            <label for="pre-telefono" class="form-label">Teléfono de Contacto (con prefijo int.)</label>
+            <input type="tel" id="pre-telefono" name="telefono" class="form-input" placeholder="+54 9 11..." />
+          </div>
+        </div>
+
+        <div class="form-grupo">
+          <label for="pre-vinculo" class="form-label">Condición con Castilla y León (Art. 2.3 Ley 8/2013) *</label>
+          <select id="pre-vinculo" name="vinculoCyl" class="form-input" required>
+            <option value="">Selecciona tu vinculación...</option>
+            <option value="Nacido en Castilla y León">Persona nacida en Castilla y León</option>
+            <option value="Residencia 10 años continuados">Residente durante 10 años continuados en Castilla y León</option>
+            <option value="Descendiente de nacido en CyL">Descendiente directo de persona nacida en Castilla y León</option>
+            <option value="Descendiente de residente 10 años">Descendiente de residente en CyL durante 10 años continuados</option>
+          </select>
+        </div>
+
+        <div class="form-grupo">
+          <label for="pre-master" class="form-label">Máster Universitario Oficial de Interés (ULE)</label>
+          <input type="text" id="pre-master" name="masterInteres" class="form-input" placeholder="Ej. Máster en Ingeniería Informática, MBA, etc." />
+        </div>
+
+        <button type="submit" id="btn-submit-preinscripcion" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          <span>Confirmar y Guardar Preinscripción</span>
+        </button>
+
+        <div id="resultado-preinscripcion" class="resultado-caja" style="display: none;"></div>
+      </form>
+    </div>
+
+    <!-- Formulario 2: Consultar Estado -->
+    <div id="panel-modal-consulta" class="modal-panel" style="display: none;">
+      <p class="modal-desc">
+        Introduce tu DNI/Pasaporte o tu código de seguimiento (ej. MCYL-2026-XXXX) para consultar el estado actual en la base de datos de FGULEM.
+      </p>
+
+      <form id="form-consulta-estado" class="form-modal">
+        <div class="form-grupo">
+          <label for="consulta-identificador" class="form-label">DNI / Pasaporte o Código de Solicitud *</label>
+          <input type="text" id="consulta-identificador" class="form-input" placeholder="Ej. 12345678Z o MCYL-2026-1234" required />
+        </div>
+
+        <button type="submit" id="btn-submit-consulta" class="btn-primary" style="width: 100%;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Consultar Estado</span>
+        </button>
+
+        <div id="resultado-consulta" class="resultado-caja" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .modal-dialog {
+    border: none;
+    background: transparent;
+    max-width: 680px;
+    width: 92%;
+    margin: auto;
+    padding: 0;
+    box-shadow: var(--shadow-xl);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .modal-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .modal-contenedor {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .modal-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-dark);
+  }
+
+  .modal-titulo {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-top: 0.2rem;
+  }
+
+  .modal-cerrar {
+    background: var(--color-surface-alt);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .modal-cerrar:hover {
+    background: var(--color-surface-hover);
+    color: var(--color-primary);
+  }
+
+  .modal-pestanas {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 1.5rem;
+  }
+
+  .tab-modal {
+    padding: 0.65rem 1.25rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: -2px;
+  }
+
+  .tab-modal.activo {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .modal-desc {
+    font-size: 0.925rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .resultado-caja {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .resultado-caja--exito {
+    background: var(--color-success-bg);
+    border: 1px solid var(--color-success-border);
+    color: #14532D;
+  }
+
+  .resultado-caja--error {
+    background: #FEE2E2;
+    border: 1px solid #FCA5A5;
+    color: #991B1B;
+  }
+
+  @media (max-width: 640px) {
+    .modal-contenedor {
+      padding: 1.25rem;
+    }
+  }
+</style>
