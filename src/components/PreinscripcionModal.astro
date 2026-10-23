@@ -1,102 +1,218 @@
 ---
+import { masteresUsal } from '../data/masteresUsal';
 ---
 
 <dialog id="modal-preinscripcion" class="modal-dialog" aria-labelledby="modal-titulo">
   <div class="modal-contenedor">
+    <!-- Header del Modal -->
     <div class="modal-header">
       <div class="modal-header__meta">
-        <span class="modal-tag">Convocatoria Oficial 2026-2027</span>
+        <div class="modal-tag">
+          <span class="modal-tag-dot" aria-hidden="true"></span>
+          <span>Convocatoria Oficial 2026-2027 · USAL</span>
+        </div>
         <h2 id="modal-titulo" class="modal-titulo">Plataforma Becas MásterCyL</h2>
       </div>
-      <button type="button" id="btn-cerrar-modal" class="modal-cerrar" aria-label="Cerrar modal">&times;</button>
+      <button type="button" id="btn-cerrar-modal" class="modal-cerrar" aria-label="Cerrar ventana">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
 
-    <!-- Pestañas internas del modal -->
-    <div class="modal-pestanas">
-      <button type="button" id="tab-modal-nuevo" class="tab-modal activo">Nueva Preinscripción</button>
-      <button type="button" id="tab-modal-consulta" class="tab-modal">Consultar Estado</button>
+    <!-- Pestañas tipo Segmented Switch moderno -->
+    <div class="modal-switch-wrap">
+      <div class="modal-switch" role="tablist">
+        <button type="button" id="tab-modal-nuevo" class="tab-modal activo" role="tab" aria-selected="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          <span>Nueva Preinscripción</span>
+        </button>
+        <button type="button" id="tab-modal-consulta" class="tab-modal" role="tab" aria-selected="false">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Consultar Estado</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Formulario 1: Nueva Preinscripción -->
+    <!-- Panel 1: Nueva Preinscripción -->
     <div id="panel-modal-nuevo" class="modal-panel">
-      <p class="modal-desc">
-        Cumplimenta los datos iniciales para generar tu número de expediente de preinscripción en la Universidad de Salamanca.
-      </p>
+      <div class="modal-intro-caja">
+        <p class="modal-desc">
+          Cumplimenta los datos iniciales para registrar tu expediente telemático en la Fundación General de la Universidad de Salamanca (FGUSAL).
+        </p>
+      </div>
 
       <form id="form-preinscripcion" class="form-modal">
-        <div class="form-fila">
-          <div class="form-grupo">
-            <label for="pre-nombre" class="form-label">Nombre *</label>
-            <input type="text" id="pre-nombre" name="nombre" class="form-input" placeholder="Tu nombre" required />
+        <!-- Bloque 1: Datos Personales -->
+        <div class="form-bloque">
+          <div class="form-bloque-titulo">
+            <span class="paso-num">1</span>
+            <span>Datos Personales del Solicitante</span>
           </div>
-          <div class="form-grupo">
-            <label for="pre-apellidos" class="form-label">Apellidos *</label>
-            <input type="text" id="pre-apellidos" name="apellidos" class="form-input" placeholder="Tus apellidos" required />
+
+          <div class="form-fila">
+            <div class="form-grupo">
+              <label for="pre-nombre" class="form-label">
+                <span>Nombre</span>
+                <span class="req">* Obligatorio</span>
+              </label>
+              <div class="form-input-wrap">
+                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <input type="text" id="pre-nombre" name="nombre" class="form-input" placeholder="Ej. Carlos María" required autocomplete="given-name" />
+              </div>
+            </div>
+
+            <div class="form-grupo">
+              <label for="pre-apellidos" class="form-label">
+                <span>Apellidos</span>
+                <span class="req">* Obligatorio</span>
+              </label>
+              <div class="form-input-wrap">
+                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <input type="text" id="pre-apellidos" name="apellidos" class="form-input" placeholder="Ej. Rodríguez López" required autocomplete="family-name" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-fila">
+            <div class="form-grupo">
+              <label for="pre-dni" class="form-label">
+                <span>DNI o Pasaporte Español</span>
+                <span class="req">* Obligatorio</span>
+              </label>
+              <div class="form-input-wrap">
+                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><line x1="15" y1="8" x2="17" y2="8"></line><line x1="15" y1="12" x2="17" y2="12"></line></svg>
+                <input type="text" id="pre-dni" name="dniPasaporte" class="form-input" placeholder="12345678Z o N.º Pasaporte" required />
+              </div>
+              <span class="form-helper">Debe acreditar nacionalidad española</span>
+            </div>
+
+            <div class="form-grupo">
+              <label for="pre-email" class="form-label">
+                <span>Correo Electrónico</span>
+                <span class="req">* Obligatorio</span>
+              </label>
+              <div class="form-input-wrap">
+                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <input type="email" id="pre-email" name="email" class="form-input" placeholder="carlos@ejemplo.com" required autocomplete="email" />
+              </div>
+              <span class="form-helper">Recibirás aquí el resguardo y avisos</span>
+            </div>
           </div>
         </div>
 
-        <div class="form-fila">
-          <div class="form-grupo">
-            <label for="pre-dni" class="form-label">DNI o Pasaporte Español *</label>
-            <input type="text" id="pre-dni" name="dniPasaporte" class="form-input" placeholder="Ej. 12345678Z o Pasaporte" required />
+        <!-- Bloque 2: Residencia y Vinculación CyL -->
+        <div class="form-bloque">
+          <div class="form-bloque-titulo">
+            <span class="paso-num">2</span>
+            <span>Residencia en Hispanoamérica y Vinculación CyL</span>
           </div>
+
+          <div class="form-fila">
+            <div class="form-grupo">
+              <label for="pre-pais" class="form-label">
+                <span>País de Residencia Actual</span>
+                <span class="req">* Obligatorio</span>
+              </label>
+              <div class="form-input-wrap">
+                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <input type="text" id="pre-pais" name="paisResidencia" class="form-input" placeholder="Ej. Argentina, México, Chile..." required />
+              </div>
+            </div>
+
+            <div class="form-grupo">
+              <label for="pre-telefono" class="form-label">
+                <span>Teléfono con Prefijo Internacional</span>
+                <span class="badge-opcional">Opcional</span>
+              </label>
+              <div class="form-input-wrap">
+                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <input type="tel" id="pre-telefono" name="telefono" class="form-input" placeholder="+54 9 11 2345-6789" />
+              </div>
+            </div>
+          </div>
+
           <div class="form-grupo">
-            <label for="pre-email" class="form-label">Correo Electrónico *</label>
-            <input type="email" id="pre-email" name="email" class="form-input" placeholder="tu.correo@ejemplo.com" required />
+            <label for="pre-vinculo" class="form-label">
+              <span>Condición con Castilla y León (Art. 2.3 Ley 8/2013)</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <div class="form-input-wrap">
+              <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <select id="pre-vinculo" name="vinculoCyl" class="form-select" required>
+                <option value="">Selecciona cómo acreditas tu vinculación con CyL...</option>
+                <option value="Nacido en Castilla y León">Persona nacida en la Comunidad de Castilla y León</option>
+                <option value="Residencia 10 años continuados">Residente durante diez (10) años continuados en Castilla y León</option>
+                <option value="Descendiente de nacido en CyL">Descendiente directo (hijo/a, nieto/a) de persona nacida en Castilla y León</option>
+                <option value="Descendiente de residente 10 años">Descendiente directo de residente en CyL durante 10 años continuados</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="form-fila">
-          <div class="form-grupo">
-            <label for="pre-pais" class="form-label">País de Residencia en Hispanoamérica *</label>
-            <input type="text" id="pre-pais" name="paisResidencia" class="form-input" placeholder="Ej. Argentina, México, Colombia..." required />
+        <!-- Bloque 3: Máster de Interés en la USAL -->
+        <div class="form-bloque">
+          <div class="form-bloque-titulo">
+            <span class="paso-num">3</span>
+            <span>Máster Universitario Oficial de Interés (USAL)</span>
           </div>
+
           <div class="form-grupo">
-            <label for="pre-telefono" class="form-label">Teléfono de Contacto (con prefijo int.)</label>
-            <input type="tel" id="pre-telefono" name="telefono" class="form-input" placeholder="+54 9 11..." />
+            <label for="pre-master" class="form-label">
+              <span>Selecciona o escribe el Máster de la Universidad de Salamanca</span>
+              <span class="badge-opcional">89 másteres oficiales</span>
+            </label>
+            <div class="form-input-wrap">
+              <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              <input 
+                type="text" 
+                id="pre-master" 
+                name="masterInteres" 
+                class="form-input" 
+                list="lista-masteres-usal" 
+                placeholder="Escribe para buscar (ej. Inteligencia Artificial, Filosofía, MBA, Química...)" 
+              />
+            </div>
+            <datalist id="lista-masteres-usal">
+              {masteresUsal.map((m) => (
+                <option value={m.titulo}>{m.area} · {m.modalidad}</option>
+              ))}
+            </datalist>
+            <span class="form-helper">Debe ser un máster oficial de al menos 60 créditos ECTS presenciales en la USAL</span>
           </div>
         </div>
 
-        <div class="form-grupo">
-          <label for="pre-vinculo" class="form-label">Condición con Castilla y León (Art. 2.3 Ley 8/2013) *</label>
-          <select id="pre-vinculo" name="vinculoCyl" class="form-input" required>
-            <option value="">Selecciona tu vinculación...</option>
-            <option value="Nacido en Castilla y León">Persona nacida en Castilla y León</option>
-            <option value="Residencia 10 años continuados">Residente durante 10 años continuados en Castilla y León</option>
-            <option value="Descendiente de nacido en CyL">Descendiente directo de persona nacida en Castilla y León</option>
-            <option value="Descendiente de residente 10 años">Descendiente de residente en CyL durante 10 años continuados</option>
-          </select>
-        </div>
-
-        <div class="form-grupo">
-          <label for="pre-master" class="form-label">Máster Universitario Oficial de Interés (USAL)</label>
-          <input type="text" id="pre-master" name="masterInteres" class="form-input" placeholder="Ej. Máster en Ingeniería Informática, MBA, etc." />
-        </div>
-
-        <button type="submit" id="btn-submit-preinscripcion" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-          <span>Confirmar y Guardar Preinscripción</span>
+        <!-- Botón de Envío -->
+        <button type="submit" id="btn-submit-preinscripcion" class="form-btn-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          <span>Confirmar y Guardar Preinscripción en FGUSAL</span>
         </button>
 
         <div id="resultado-preinscripcion" class="resultado-caja" style="display: none;"></div>
       </form>
     </div>
 
-    <!-- Formulario 2: Consultar Estado -->
+    <!-- Panel 2: Consultar Estado -->
     <div id="panel-modal-consulta" class="modal-panel" style="display: none;">
-      <p class="modal-desc">
-        Introduce tu DNI/Pasaporte o tu código de seguimiento (ej. MCYL-2026-XXXX) para consultar el estado actual en la base de datos de FGUSAL.
-      </p>
+      <div class="modal-intro-caja">
+        <p class="modal-desc">
+          Introduce tu DNI/Pasaporte o tu código de seguimiento (ej. <code class="code-badge">MCYL-2026-XXXX</code>) para comprobar en tiempo real el estado de tu preinscripción en la base de datos de FGUSAL.
+        </p>
+      </div>
 
       <form id="form-consulta-estado" class="form-modal">
         <div class="form-grupo">
-          <label for="consulta-identificador" class="form-label">DNI / Pasaporte o Código de Solicitud *</label>
-          <input type="text" id="consulta-identificador" class="form-input" placeholder="Ej. 12345678Z o MCYL-2026-1234" required />
+          <label for="consulta-identificador" class="form-label">
+            <span>DNI / Pasaporte o Código de Solicitud</span>
+            <span class="req">* Obligatorio</span>
+          </label>
+          <div class="form-input-wrap">
+            <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="consulta-identificador" class="form-input" placeholder="Ej. 12345678Z o MCYL-2026-9789" required />
+          </div>
         </div>
 
-        <button type="submit" id="btn-submit-consulta" class="btn-primary" style="width: 100%;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <span>Consultar Estado</span>
+        <button type="submit" id="btn-submit-consulta" class="form-btn-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Consultar Estado en la Base de Datos</span>
         </button>
 
         <div id="resultado-consulta" class="resultado-caja" style="display: none;"></div>
@@ -109,135 +225,248 @@
   .modal-dialog {
     border: none;
     background: transparent;
-    max-width: 680px;
-    width: 92%;
+    max-width: 740px;
+    width: 94%;
     margin: auto;
     padding: 0;
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
     border-radius: var(--radius-xl);
     overflow: hidden;
   }
 
   .modal-dialog::backdrop {
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .modal-contenedor {
-    background: var(--color-surface);
+    background: #FFFFFF;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 2.25rem;
     max-height: 90vh;
     overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 40px -15px rgba(138, 21, 40, 0.15);
+  }
+
+  .modal-contenedor::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #9E1B32 0%, #D4AF37 50%, #9E1B32 100%);
   }
 
   .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border-subtle);
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #E2E8F0;
   }
 
   .modal-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-accent-dark);
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background: rgba(138, 21, 40, 0.08);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+  }
+
+  .modal-tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
   }
 
   .modal-titulo {
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    margin-top: 0.2rem;
+    font-size: 1.65rem;
+    color: #0F172A;
+    margin-top: 0.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   .modal-cerrar {
-    background: var(--color-surface-alt);
-    border: none;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
     border-radius: 50%;
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    color: var(--color-text-muted);
+    color: #64748B;
     cursor: pointer;
     transition: all var(--transition-fast);
+    flex-shrink: 0;
   }
 
   .modal-cerrar:hover {
-    background: var(--color-surface-hover);
-    color: var(--color-primary);
+    background: var(--color-primary);
+    color: #FFFFFF;
+    border-color: var(--color-primary);
+    transform: rotate(90deg);
   }
 
-  .modal-pestanas {
-    display: flex;
-    gap: 0.5rem;
-    border-bottom: 2px solid var(--color-border);
-    margin-bottom: 1.5rem;
+  /* Segmented switch tab bar */
+  .modal-switch-wrap {
+    margin-bottom: 1.75rem;
+  }
+
+  .modal-switch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem;
+    background: #F1F5F9;
+    padding: 0.35rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid #E2E8F0;
   }
 
   .tab-modal {
-    padding: 0.65rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
     background: transparent;
     border: none;
-    border-bottom: 3px solid transparent;
+    border-radius: var(--radius-md);
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--color-text-muted);
+    color: #64748B;
     cursor: pointer;
     transition: all var(--transition-fast);
-    margin-bottom: -2px;
   }
 
   .tab-modal.activo {
+    background: #FFFFFF;
     color: var(--color-primary);
-    border-bottom-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .tab-modal:hover:not(.activo) {
+    color: #1E293B;
+  }
+
+  .modal-intro-caja {
+    background: #F8FAFC;
+    border-left: 3px solid var(--color-primary);
+    padding: 0.85rem 1.15rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: 1.5rem;
   }
 
   .modal-desc {
     font-size: 0.925rem;
-    color: var(--color-text-muted);
+    color: #475569;
     line-height: 1.55;
-    margin-bottom: 1.25rem;
+    margin: 0;
+  }
+
+  .code-badge {
+    font-family: monospace;
+    font-weight: 700;
+    color: var(--color-primary);
+    background: rgba(138, 21, 40, 0.08);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
   }
 
   .form-modal {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-bloque {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-lg);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
     gap: 1.1rem;
+    transition: border-color var(--transition-fast);
+  }
+
+  .form-bloque:focus-within {
+    border-color: rgba(138, 21, 40, 0.35);
+    background: #FFFFFF;
+  }
+
+  .form-bloque-titulo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0F172A;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed #CBD5E1;
+  }
+
+  .paso-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .resultado-caja {
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-    margin-top: 1rem;
+    padding: 1.35rem;
+    border-radius: var(--radius-lg);
+    margin-top: 1.25rem;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.55;
+    animation: fadeIn 0.3s ease-out;
   }
 
   .resultado-caja--exito {
-    background: var(--color-success-bg);
-    border: 1px solid var(--color-success-border);
+    background: #F0FDF4;
+    border: 1.5px solid #86EFAC;
     color: #14532D;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
   }
 
   .resultado-caja--error {
-    background: #FEE2E2;
-    border: 1px solid #FCA5A5;
+    background: #FEF2F2;
+    border: 1.5px solid #FCA5A5;
     color: #991B1B;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 640px) {
     .modal-contenedor {
       padding: 1.25rem;
+    }
+    .modal-switch {
+      grid-template-columns: 1fr;
     }
   }
 </style>

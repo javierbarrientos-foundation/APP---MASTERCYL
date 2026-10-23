@@ -27,7 +27,7 @@ pnpm-debug.log*
 extracted_media/
 
 # local database files
-data/
+/data/
 *.db
 *.db-journal
 *.db-wal
