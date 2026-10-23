@@ -9,3 +9,8 @@ binding = "DB"
 database_name = "mastercyl"
 database_id = "3be4fdc9-8b6a-422c-a979-30bc7b2b4211"
 migrations_dir = "migrations"
+
+# Avisos por correo (Cloudflare Email Service). Plan gratuito: solo destinatarios verificados.
+[[send_email]]
+name = "EMAIL"
+allowed_destination_addresses = ["ahgudino@usal.es", "ppoveda@usal.es"]
