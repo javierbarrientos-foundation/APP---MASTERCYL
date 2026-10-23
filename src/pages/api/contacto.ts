@@ -50,7 +50,7 @@ export const POST: APIRoute = async (context) => {
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Tu consulta ha sido registrada con éxito en el sistema de FGULEM.',
+        message: 'Tu consulta ha sido registrada con éxito en el sistema de la Fundación General de la Universidad de Salamanca (FGUSAL).',
       }),
       { status: 201, headers: { 'Content-Type': 'application/json' } }
     );
