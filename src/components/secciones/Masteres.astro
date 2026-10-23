@@ -1,0 +1,683 @@
+---
+interface Master {
+  id: string;
+  titulo: string;
+  area: string;
+  areaCode: string;
+  creditos: number;
+  modalidad: string;
+  centro: string;
+  descripcion: string;
+}
+
+const masteres: Master[] = [
+  // Artes y Humanidades
+  {
+    id: "m-profesorado",
+    titulo: "Máster Universitario en Formación del Profesorado de Educación Secundaria Obligatoria y Bachillerato, FP y Enseñanzas de Idiomas",
+    area: "Artes y Humanidades",
+    areaCode: "humanidades",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Educación",
+    descripcion: "Habilita para el ejercicio de las profesiones reguladas de Profesor de Educación Secundaria Obligatoria y Bachillerato, Formación Profesional y Enseñanzas de Idiomas."
+  },
+  {
+    id: "m-filosofia",
+    titulo: "Máster Universitario en Investigación en Filosofía",
+    area: "Artes y Humanidades",
+    areaCode: "humanidades",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Filosofía y Letras",
+    descripcion: "Formación investigadora avanzada y profundización en el pensamiento contemporáneo, teoría del conocimiento y ética aplicada."
+  },
+  {
+    id: "m-espanol-ele",
+    titulo: "Máster Universitario en Lingüística y Enseñanza del Español como Lengua Extranjera (ELE)",
+    area: "Artes y Humanidades",
+    areaCode: "humanidades",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Filosofía y Letras",
+    descripcion: "Especialización lingüística y metodológica para la docencia profesional e investigadora del español en contextos internacionales."
+  },
+  {
+    id: "m-cultura-europea",
+    titulo: "Máster Universitario en Cultura y Pensamiento Europeo: Tradición y Pervivencia",
+    area: "Artes y Humanidades",
+    areaCode: "humanidades",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Filosofía y Letras",
+    descripcion: "Estudio interdisciplinar de las raíces humanísticas europeas y su proyección en el pensamiento y patrimonio cultural actual."
+  },
+  {
+    id: "m-identidad-medieval",
+    titulo: "Máster Universitario en Identidad Europea Medieval",
+    area: "Artes y Humanidades",
+    areaCode: "humanidades",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Filosofía y Letras",
+    descripcion: "Máster interuniversitario de excelencia centrado en el legado documental, arqueológico y cultural de la Edad Media."
+  },
+
+  // Ciencias
+  {
+    id: "m-biomedicina",
+    titulo: "Máster Universitario en Metodología de Investigación en Biología Fundamental y Biomedicina",
+    area: "Ciencias",
+    areaCode: "ciencias",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias Biológicas y Ambientales",
+    descripcion: "Formación científica de vanguardia en biotecnología molecular, genética y mecanismos fisiopatológicos biomédicos."
+  },
+  {
+    id: "m-flora-fauna",
+    titulo: "Máster Universitario en Estudios Avanzados en Flora y Fauna",
+    area: "Ciencias",
+    areaCode: "ciencias",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias Biológicas y Ambientales",
+    descripcion: "Especialización avanzada en biodiversidad, biogeografía y técnicas de muestreo e inventario biológico."
+  },
+  {
+    id: "m-fauna-silvestre",
+    titulo: "Máster Universitario en Gestión de Fauna Silvestre",
+    area: "Ciencias",
+    areaCode: "ciencias",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias Biológicas y Ambientales",
+    descripcion: "Capacitación técnica para la conservación, manejo, monitoreo y planes de gestión de especies amenazadas y ecosistemas naturales."
+  },
+  {
+    id: "m-riesgos-naturales",
+    titulo: "Máster Universitario en Riesgos Naturales: Identificación, Análisis y Gestión",
+    area: "Ciencias",
+    areaCode: "ciencias",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias Biológicas y Ambientales",
+    descripcion: "Análisis geológico, geomorfológico y climático para la prevención, modelización y ordenación territorial frente a catástrofes naturales."
+  },
+
+  // Ciencias de la Salud
+  {
+    id: "m-sociosanitarias",
+    titulo: "Máster Universitario en Investigación en Ciencias Sociosanitarias",
+    area: "Ciencias de la Salud",
+    areaCode: "salud",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias de la Salud",
+    descripcion: "Metodologías de investigación clínica, bioestadística y salud comunitaria aplicadas a la atención integral sociosanitaria."
+  },
+  {
+    id: "m-envejecimiento",
+    titulo: "Máster Universitario en Envejecimiento Saludable y Calidad de Vida",
+    area: "Ciencias de la Salud",
+    areaCode: "salud",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias de la Salud",
+    descripcion: "Abordaje biopsicosocial del envejecimiento activo, prevención de la dependencia y terapias para la promoción de la salud en la vejez."
+  },
+  {
+    id: "m-investigacion-veterinaria",
+    titulo: "Máster Universitario en Investigación Veterinaria y Ciencia y Tecnología de los Alimentos",
+    area: "Ciencias de la Salud",
+    areaCode: "salud",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Veterinaria",
+    descripcion: "Investigación experimental en sanidad animal, bioseguridad, zoonosis y tecnologías de procesamiento de alimentos."
+  },
+  {
+    id: "m-seguridad-alimentaria",
+    titulo: "Máster Universitario en Seguridad y Calidad de los Alimentos",
+    area: "Ciencias de la Salud",
+    areaCode: "salud",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Veterinaria",
+    descripcion: "Auditoría de sistemas APPCC, análisis microbiológico y toxicológico y normativa higiénico-sanitaria en la industria agroalimentaria."
+  },
+
+  // Ciencias Sociales y Jurídicas
+  {
+    id: "m-abogacia",
+    titulo: "Máster Universitario en Abogacía y Procura",
+    area: "Ciencias Sociales y Jurídicas",
+    areaCode: "sociales",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Facultad de Derecho",
+    descripcion: "Habilita para el examen estatal de acceso y el ejercicio profesional regulado de la abogacía y la procura en España."
+  },
+  {
+    id: "m-mba",
+    titulo: "Máster Universitario en Dirección de Empresas (MBA)",
+    area: "Ciencias Sociales y Jurídicas",
+    areaCode: "sociales",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias Económicas y Empresariales",
+    descripcion: "Dirección estratégica corporativa, innovación empresarial, control de gestión financiero y liderazgo organizativo global."
+  },
+  {
+    id: "m-cooperacion",
+    titulo: "Máster Universitario en Cooperación Internacional al Desarrollo",
+    area: "Ciencias Sociales y Jurídicas",
+    areaCode: "sociales",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias Económicas y Empresariales",
+    descripcion: "Diseño, gestión y evaluación de políticas de desarrollo sostenible, derechos humanos y acción humanitaria internacional."
+  },
+  {
+    id: "m-derecho-ciberseguridad",
+    titulo: "Máster Universitario en Derecho de la Ciberseguridad y Entorno Digital",
+    area: "Ciencias Sociales y Jurídicas",
+    areaCode: "sociales",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Derecho",
+    descripcion: "Marco legal internacional de la ciberseguridad, protección de datos, gobernanza digital y cibercrimen en colaboración con INCIBE."
+  },
+  {
+    id: "m-psicologia-sanitaria",
+    titulo: "Máster Universitario en Psicología General Sanitaria",
+    area: "Ciencias Sociales y Jurídicas",
+    areaCode: "sociales",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Facultad de Educación",
+    descripcion: "Habilita profesionalmente para la práctica sanitaria asistencial y evaluación psicológica en centros clínicos."
+  },
+  {
+    id: "m-deporte",
+    titulo: "Máster Universitario en Entrenamiento y Rendimiento Deportivo",
+    area: "Ciencias Sociales y Jurídicas",
+    areaCode: "sociales",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Facultad de Ciencias de la Actividad Física y del Deporte (FCAFD)",
+    descripcion: "Optimización fisiológica, biomecánica y planificación avanzada de la preparación física en deportistas de alto nivel."
+  },
+
+  // Ingeniería y Arquitectura
+  {
+    id: "m-informatica",
+    titulo: "Máster Universitario en Ingeniería Informática",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingenierías Industrial, Informática y Aeroespacial",
+    descripcion: "Habilita para la profesión regulada de Ingeniero en Informática con foco en arquitecturas software, cloud y sistemas complejos."
+  },
+  {
+    id: "m-ciberseguridad-tic",
+    titulo: "Máster Universitario en Seguridad de las Tecnologías de la Información y de las Comunicaciones",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingenierías Industrial, Informática y Aeroespacial",
+    descripcion: "Criptografía, seguridad perimetral, auditoría de código, pentesting y análisis forense digital en el polo tecnológico de León."
+  },
+  {
+    id: "m-ia-aplicada",
+    titulo: "Máster Universitario en Inteligencia Artificial Aplicada",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingenierías Industrial, Informática y Aeroespacial",
+    descripcion: "Machine learning, visión artificial, procesamiento de lenguaje natural y computación de alto rendimiento con el supercomputador Caléndula."
+  },
+  {
+    id: "m-industrial",
+    titulo: "Máster Universitario en Ingeniería Industrial",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 120,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingenierías Industrial, Informática y Aeroespacial",
+    descripcion: "Habilita para el ejercicio regulado de Ingeniero Industrial: energía, robótica, fabricación avanzada y gestión integral de plantas."
+  },
+  {
+    id: "m-aeronautica",
+    titulo: "Máster Universitario en Ingeniería Aeronáutica",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingenierías Industrial, Informática y Aeroespacial",
+    descripcion: "Habilita para la profesión de Ingeniero Aeronáutico: aerodinámica, propulsión, estructuras aeroespaciales y sistemas de navegación."
+  },
+  {
+    id: "m-minas-energia",
+    titulo: "Máster Universitario en Ingeniería de Minas y Recursos Energéticos",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Escuela Superior y Técnica de Ingenieros de Minas",
+    descripcion: "Habilitante para Ingeniero de Minas: transición ecológica, energías renovables, almacenamiento subterráneo y materias primas críticas."
+  },
+  {
+    id: "m-geoinformatica",
+    titulo: "Máster Universitario en Geoinformática para la Gestión de Recursos Naturales",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Escuela Superior y Técnica de Ingenieros de Minas (Campus Ponferrada)",
+    descripcion: "Sistemas de Información Geográfica (SIG), teledetección satelital, LiDAR y cartografía digital avanzada aplicada al medio ambiente."
+  },
+  {
+    id: "m-agronomica",
+    titulo: "Máster Universitario en Ingeniería Agronómica",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingeniería Agraria y Forestal (EIAF)",
+    descripcion: "Habilita para la profesión de Ingeniero Agrónomo: agricultura digital de precisión, biotecnología vegetal e ingeniería rural sostenible."
+  },
+  {
+    id: "m-forestal",
+    titulo: "Máster Universitario en Ingeniería Forestal y del Medio Natural",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 90,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingeniería Agraria y Forestal (EIAF)",
+    descripcion: "Habilita para Ingeniero de Montes: gestión silvícola sostenible, prevención de incendios y bioeconomía forestal."
+  },
+  {
+    id: "m-industria40",
+    titulo: "Máster Universitario en Industria 4.0",
+    area: "Ingeniería y Arquitectura",
+    areaCode: "ingenieria",
+    creditos: 60,
+    modalidad: "Presencial",
+    centro: "Escuela de Ingenierías Industrial, Informática y Aeroespacial",
+    descripcion: "Internet de las Cosas (IoT), gemelos digitales, fabricación aditiva y automatización robótica para la fábrica inteligente."
+  }
+];
+
+const areas = [
+  { code: "todas", label: "Todas las áreas" },
+  { code: "humanidades", label: "Artes y Humanidades" },
+  { code: "ciencias", label: "Ciencias" },
+  { code: "salud", label: "Ciencias de la Salud" },
+  { code: "sociales", label: "Ciencias Sociales y Jurídicas" },
+  { code: "ingenieria", label: "Ingeniería y Arquitectura" }
+];
+---
+
+<section id="masteres" class="seccion" hidden aria-labelledby="titulo-masteres">
+  <div class="seccion__header">
+    <span class="seccion__categoria">Oferta Académica Oficial</span>
+    <h2 id="titulo-masteres" class="seccion__titulo">Másteres Universitarios Oficiales</h2>
+    <p class="seccion__subtitulo">Catálogo oficial de enseñanzas de postgrado presenciales de la Universidad de León computables para las Becas MásterCyL 2026-2027</p>
+  </div>
+
+  <div class="bloque-contenido">
+    <div class="aviso-caja aviso-caja--primary">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <div>
+        <strong>Requisito Académico Esencial:</strong> Conforme a las bases, el máster debe impartirse en <strong>régimen presencial</strong> y contar con un mínimo de <strong>60 créditos ECTS</strong> en la Universidad de León durante el curso 2026-2027.
+      </div>
+    </div>
+
+    <!-- Controles del buscador de másteres -->
+    <div class="masteres-controles">
+      <div class="buscador-caja">
+        <svg class="buscador-icono" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input 
+          type="search" 
+          id="buscador-masteres" 
+          class="buscador-input" 
+          placeholder="Buscar máster por título, área, centro o palabra clave (ej. Informática, MBA, Salud)..." 
+          aria-label="Buscar máster universitario"
+        />
+        <button type="button" id="btn-limpiar-busqueda" class="btn-limpiar" aria-label="Limpiar búsqueda" style="display: none;">✕</button>
+      </div>
+
+      <div class="filtro-areas" role="group" aria-label="Filtrar por área de conocimiento">
+        {areas.map((a, idx) => (
+          <button 
+            type="button" 
+            class={`btn-filtro ${idx === 0 ? 'activo' : ''}`} 
+            data-area={a.code}
+          >
+            {a.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Contador de resultados -->
+    <div class="masteres-meta">
+      <span id="contador-masteres" class="contador-texto">Mostrando {masteres.length} másteres oficiales</span>
+    </div>
+
+    <!-- Lista de tarjetas de másteres -->
+    <div class="lista-masteres" id="contenedor-masteres">
+      {masteres.map((m) => (
+        <article 
+          class="master-card" 
+          data-area={m.areaCode} 
+          data-titulo={m.titulo.toLowerCase()} 
+          data-desc={m.descripcion.toLowerCase()}
+          data-centro={m.centro.toLowerCase()}
+          id={m.id}
+        >
+          <div class="master-card__top">
+            <span class={`badge-area badge-area--${m.areaCode}`}>{m.area}</span>
+            <div class="master-card__tags">
+              <span class="tag-creditos">{m.creditos} ECTS</span>
+              <span class="tag-modalidad">{m.modalidad}</span>
+            </div>
+          </div>
+
+          <h3 class="master-card__titulo">{m.titulo}</h3>
+          
+          <div class="master-card__centro">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path><path d="M9 9h1"></path><path d="M9 13h1"></path><path d="M9 17h1"></path></svg>
+            <span>{m.centro}</span>
+          </div>
+
+          <p class="master-card__desc">{m.descripcion}</p>
+
+          <div class="master-card__footer">
+            <span class="valido-beca">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Válido para Beca MásterCyL
+            </span>
+            <a href="https://www.unileon.es/estudiantes/estudiantes-master" target="_blank" rel="noopener noreferrer" class="link-detalle" title="Ver plan de estudios en web de la Universidad de León">
+              <span>Más información</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Mensaje sin resultados -->
+    <div id="sin-resultados" class="sin-resultados-caja" style="display: none;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      <h3>No se encontraron másteres coincidentes</h3>
+      <p>Prueba con otros términos de búsqueda o selecciona "Todas las áreas" para ver la oferta completa.</p>
+      <button type="button" id="btn-resetear-filtros" class="btn-primary" style="margin-top: 1rem; padding: 0.5rem 1.25rem; font-size: 0.9rem;">
+        Restablecer filtros
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .masteres-controles {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .buscador-caja {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .buscador-icono {
+    position: absolute;
+    left: 1.25rem;
+    color: var(--color-text-light);
+    pointer-events: none;
+  }
+
+  .buscador-input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 3.25rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    color: var(--color-text-main);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .buscador-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(138, 21, 40, 0.12);
+  }
+
+  .btn-limpiar {
+    position: absolute;
+    right: 1.25rem;
+    background: var(--color-surface-hover);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .filtro-areas {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-filtro {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-filtro:hover {
+    background: var(--color-surface-alt);
+    color: var(--color-text-main);
+    border-color: var(--color-text-light);
+  }
+
+  .btn-filtro.activo {
+    background: var(--color-primary);
+    color: var(--color-text-white);
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 6px rgba(138, 21, 40, 0.25);
+  }
+
+  .masteres-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .contador-texto {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .lista-masteres {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .master-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .master-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-md);
+  }
+
+  .master-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .badge-area {
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+  }
+
+  .badge-area--humanidades { background: #FEF3C7; color: #92400E; }
+  .badge-area--ciencias { background: #E0F2FE; color: #075985; }
+  .badge-area--salud { background: #DCFCE7; color: #166534; }
+  .badge-area--sociales { background: #F3E8FF; color: #6B21A8; }
+  .badge-area--ingenieria { background: #FEE2E2; color: #991B1B; }
+
+  .master-card__tags {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .tag-creditos {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--color-surface-alt);
+    color: var(--color-text-main);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  .tag-modalidad {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #EBF3FA;
+    color: #0A3663;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .master-card__titulo {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-text-main);
+    margin-bottom: 0.5rem;
+  }
+
+  .master-card__centro {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .master-card__desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .master-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-subtle);
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .valido-beca {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.775rem;
+    font-weight: 700;
+    color: var(--color-success);
+  }
+
+  .link-detalle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .link-detalle:hover {
+    text-decoration: underline;
+  }
+
+  .sin-resultados-caja {
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-lg);
+    border: 2px dashed var(--color-border);
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .sin-resultados-caja h3 {
+    font-size: 1.25rem;
+    color: var(--color-text-main);
+  }
+
+  @media (max-width: 640px) {
+    .lista-masteres {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

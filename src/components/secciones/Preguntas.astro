@@ -1,0 +1,180 @@
+---
+const faqs = [
+  {
+    q: "¿Quién puede solicitar estas becas y cuáles son los requisitos esenciales?",
+    a: "Pueden solicitarlas personas de nacionalidad española, mayores de 18 años, que residan actualmente en cualquier país de Hispanoamérica, que sean oriundas o procedentes de Castilla y León (o descendientes directos según el art. 2.3 de la Ley 8/2013), que posean la titulación oficial necesaria para acceder al máster y que estén matriculadas en el curso 2026-2027 en un máster universitario oficial presencial de al menos 60 créditos ECTS en la Universidad de León, comprometiéndose a residir en Castilla y León durante todo el curso académico."
+  },
+  {
+    q: "¿Cómo se acredita la condición de persona oriunda o procedente de Castilla y León?",
+    a: "Se acredita mediante copia del DNI o pasaporte en vigor que indique nacimiento en Castilla y León; certificado de empadronamiento histórico que demuestre residencia durante diez años continuados en cualquier municipio de la Comunidad; o bien Libro de familia o documentación oficial análoga que justifique ser descendiente directo (hijo/a o nieto/a) de personas nacidas o empadronadas durante diez años continuados en Castilla y León."
+  },
+  {
+    q: "¿Se admiten másteres cursados en modalidad online, híbrida o a tiempo parcial?",
+    a: "No. Las bases reguladoras de la convocatoria exigen de forma taxativa que el máster universitario oficial se curse en régimen estrictamente presencial y con un contenido mínimo de matrícula de 60 créditos ECTS durante el curso académico 2026-2027."
+  },
+  {
+    q: "¿Cuál es el importe de la beca y en qué plazos se percibe el dinero?",
+    a: "Cada beca está valorada en 10.000 €. La persona becada percibe directamente 8.800 € libres de retención fiscal (exentas de IRPF según el art. 7.j de la Ley 35/2006). El abono se efectúa en dos fases mediante transferencia a una cuenta bancaria española de la que el beneficiario sea titular: el 80 % (7.040 €) al publicarse la adjudicación definitiva y aportarse el seguro obligatorio; y el 20 % restante (1.760 €) una vez finalizados y acreditados formalmente los estudios cursados."
+  },
+  {
+    q: "¿Cómo se calcula y puntúa la menor renta familiar (hasta 4 puntos)?",
+    a: "Se obtiene sumando los ingresos brutos del ejercicio fiscal 2025 de todos los miembros computables (padres y tutores que convivan). La puntuación se otorga comparando los ingresos per cápita familiares con la renta per cápita oficial del país de procedencia en 2025: si es igual o inferior se asignan 4 puntos; hasta un 15 % superior, 3 puntos; entre el 15 % y el 30 % superior, 2 puntos; y entre el 30 % y el 50 % superior, 1 punto."
+  },
+  {
+    q: "¿Cómo se barema el expediente académico y qué fórmula se aplica (hasta 20 puntos)?",
+    a: "Se calcula aplicando la fórmula oficial sobre los créditos superados en la titulación que da acceso al máster: NM = ∑(Créditos × Nota convertida a baremo español) / Total créditos. Si en el certificado de origen figuran calificaciones cualitativas (sin nota numérica), se convierten con la escala oficial del Ministerio: Matrícula de Honor = 10, Sobresaliente = 9, Notable = 7,5 y Aprobado = 5,5."
+  },
+  {
+    q: "¿Cómo se acreditan los puntos por pertenecer a una comunidad castellana y leonesa en el exterior (hasta 10 puntos)?",
+    a: "Debe aportarse un certificado oficial emitido por la comunidad castellana y leonesa en el exterior reconocida, su federación o confederación, acreditando la fecha de alta como socio/a y el periodo ininterrumpido de permanencia. Se asigna 1 punto por cada año completo acreditado (hasta un máximo de 10 puntos por 10 o más años)."
+  },
+  {
+    q: "¿Dónde y cómo se presenta la solicitud firmada?",
+    a: "Primero se cumplimenta la solicitud telemática en esta plataforma «Becas MásterCyL» (disponible desde el 23 de octubre), la cual genera automáticamente el impreso oficial en PDF. Este impreso, debidamente firmado a mano o con certificado digital, debe presentarse obligatoriamente antes de las 23:59 h del 16 de noviembre de 2026 en el Registro Electrónico de la Universidad de León (sede.unileon.es) o a través de los registros previstos en el art. 16 de la Ley 39/2015, dirigido a la Fundación General de la Universidad de León y de la Empresa (FGULEM). No se recogen solicitudes en papel en las oficinas de FGULEM."
+  },
+  {
+    q: "¿Es obligatorio suscribir un seguro médico, de deceso y repatriación?",
+    a: "Sí. Para poder recibir el primer pago de la ayuda (7.040 €), la persona adjudicataria debe aportar obligatoriamente copia de la póliza de seguro médico, de deceso y de repatriación suscrita para todo el periodo de estancia en España, junto con el justificante bancario de haber abonado su prima."
+  },
+  {
+    q: "¿Dónde se publicarán las resoluciones provisional y definitiva?",
+    a: "Ambas resoluciones se publicarán en el tablón oficial de la página web de la Fundación General de la Universidad de León y de la Empresa (fgulem.unileon.es) y en el portal institucional de la Junta de Castilla y León. Tras la resolución provisional, los solicitantes contarán con cinco (5) días hábiles para presentar alegaciones."
+  }
+];
+---
+
+<section id="preguntas" class="seccion" hidden aria-labelledby="titulo-preguntas">
+  <div class="seccion__header">
+    <span class="seccion__categoria">Dudas y Respuestas</span>
+    <h2 id="titulo-preguntas" class="seccion__titulo">Preguntas Frecuentes (FAQ)</h2>
+    <p class="seccion__subtitulo">Respuestas oficiales a las consultas más habituales sobre los requisitos, baremos y tramitación de las becas</p>
+  </div>
+
+  <div class="bloque-contenido">
+    <div class="faq-lista">
+      {faqs.map((faq, index) => (
+        <details class="faq-item" id={`faq-${index + 1}`}>
+          <summary class="faq-pregunta">
+            <span class="faq-pregunta__icono">?</span>
+            <span class="faq-pregunta__texto">{faq.q}</span>
+            <svg class="faq-pregunta__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-respuesta">
+            <p>{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Ayuda adicional -->
+    <div class="aviso-caja aviso-caja--primary" style="margin-top: 2rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      <div>
+        <strong>¿Tienes alguna otra duda o consulta particular?</strong>
+        <p style="margin-top: 0.25rem;">
+          Puedes dirigirte al equipo técnico de la Fundación General de la Universidad de León y de la Empresa (FGULEM) en la sección de <a href="#contacto" style="font-weight: 700; text-decoration: underline;">Contacto</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-pregunta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.4rem;
+    font-size: 1.025rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    background: var(--color-surface);
+    transition: background-color var(--transition-fast);
+  }
+
+  .faq-pregunta::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-pregunta:hover {
+    background-color: var(--color-surface-alt);
+    color: var(--color-primary);
+  }
+
+  .faq-pregunta__icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(138, 21, 40, 0.1);
+    color: var(--color-primary);
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-pregunta__icono {
+    background: var(--color-primary);
+    color: var(--color-text-white);
+  }
+
+  .faq-pregunta__texto {
+    flex: 1;
+    line-height: 1.35;
+  }
+
+  .faq-pregunta__chevron {
+    color: var(--color-text-light);
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-pregunta__chevron {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .faq-respuesta {
+    padding: 0.5rem 1.4rem 1.4rem 3.5rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border-subtle);
+    background: #FAFBFD;
+  }
+
+  @media (max-width: 640px) {
+    .faq-pregunta {
+      padding: 1rem;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .faq-respuesta {
+      padding: 0.75rem 1rem 1.25rem 1rem;
+    }
+  }
+</style>

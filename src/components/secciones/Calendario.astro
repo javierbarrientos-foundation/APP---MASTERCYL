@@ -1,0 +1,236 @@
+---
+const fases = [
+  {
+    fase: "Fase 1",
+    titulo: "Apertura de la plataforma web telemática",
+    fecha: "23 de octubre de 2026",
+    hora: "00:00 h",
+    estado: "Activa",
+    badge: "Plataforma habilitada",
+    descripcion: "Habilitación del registro de usuarios en la plataforma «Becas MásterCyL» para cumplimentar los cuatro pasos de la solicitud y subir la documentación requerida."
+  },
+  {
+    fase: "Fase 2",
+    titulo: "Plazo de presentación en Registro Electrónico",
+    fecha: "26 de octubre al 16 de noviembre de 2026",
+    hora: "Hasta las 23:59 h",
+    estado: "En curso",
+    badge: "Plazo oficial",
+    descripcion: "Plazo ordinario de presentación del impreso de solicitud en PDF debidamente firmado ante el registro electrónico de la Universidad de León (o vías del art. 16 Ley 39/2015)."
+  },
+  {
+    fase: "Fase 3",
+    titulo: "Revisión técnica y subsanación documental",
+    fecha: "17 de noviembre al 24 de noviembre de 2026",
+    hora: "Días hábiles",
+    estado: "Próxima",
+    badge: "Evaluación técnica",
+    descripcion: "La comisión técnica examina las solicitudes y requiere la subsanación de defectos u omisiones documentales detectadas."
+  },
+  {
+    fase: "Fase 4",
+    titulo: "Publicación de la Resolución Provisional",
+    fecha: "30 de noviembre de 2026",
+    hora: "14:00 h aprox.",
+    estado: "Próxima",
+    badge: "Listado provisional",
+    descripcion: "Publicación de las puntuaciones obtenidas por expediente, comunidad en el exterior y renta familiar en la web oficial de FGULEM y canal de avisos."
+  },
+  {
+    fase: "Fase 5",
+    titulo: "Plazo de alegaciones y empadronamiento",
+    fecha: "1 al 7 de diciembre de 2026",
+    hora: "5 días hábiles",
+    estado: "Próxima",
+    badge: "Alegaciones",
+    descripcion: "Presentación telemática de alegaciones frente a la resolución provisional y aportación definitiva del certificado de empadronamiento en Castilla y León."
+  },
+  {
+    fase: "Fase 6",
+    titulo: "Resolución Definitiva y adjudicación de becas",
+    fecha: "15 de diciembre de 2026",
+    hora: "Oficial",
+    estado: "Próxima",
+    badge: "Adjudicación definitiva",
+    descripcion: "Publicación del listado definitivo de adjudicatarios de las 2 becas oficiales y suplentes ordenados por baremo."
+  },
+  {
+    fase: "Fase 7",
+    titulo: "Primer abono de la beca (80 % - 7.040 €)",
+    fecha: "Diciembre 2026 / Enero 2027",
+    hora: "Tras aceptación",
+    estado: "Próxima",
+    badge: "Primer pago",
+    descripcion: "Transferencia bancaria a la cuenta española del beneficiario una vez suscrito y acreditado el seguro médico, de deceso y repatriación."
+  },
+  {
+    fase: "Fase 8",
+    titulo: "Segundo abono y liquidación (20 % - 1.760 €)",
+    fecha: "Al finalizar el curso académico 2026-2027",
+    hora: "Julio / Septiembre 2027",
+    estado: "Próxima",
+    badge: "Liquidación final",
+    descripcion: "Abono del 20 % restante tras la acreditación documental de haber cursado con regularidad y superado las evaluaciones del máster universitario."
+  }
+];
+---
+
+<section id="calendario" class="seccion" hidden aria-labelledby="titulo-calendario">
+  <div class="seccion__header">
+    <span class="seccion__categoria">Cronograma y Fases</span>
+    <h2 id="titulo-calendario" class="seccion__titulo">Calendario de la Convocatoria</h2>
+    <p class="seccion__subtitulo">Fechas clave del proceso selectivo, resolución y abono de las ayudas del curso 2026-2027</p>
+  </div>
+
+  <div class="bloque-contenido">
+    <div class="aviso-caja aviso-caja--primary">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <div>
+        <strong>Plazo Improrrogable:</strong> Las solicitudes firmadas deben registrarse antes de las <strong>23:59 h del 16 de noviembre de 2026</strong>. Pasado ese momento no se admitirán nuevas solicitudes ordinarias.
+      </div>
+    </div>
+
+    <!-- Timeline visual -->
+    <div class="calendario-timeline">
+      {fases.map((item, idx) => (
+        <div class="timeline-nodo">
+          <div class="timeline-nodo__marca">
+            <span class="timeline-nodo__num">{idx + 1}</span>
+            <div class="timeline-nodo__linea"></div>
+          </div>
+          <div class="timeline-nodo__tarjeta">
+            <div class="timeline-nodo__encabezado">
+              <span class="timeline-nodo__badge">{item.badge}</span>
+              <span class="timeline-nodo__fecha">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                {item.fecha} ({item.hora})
+              </span>
+            </div>
+            <h3 class="timeline-nodo__titulo">{item.titulo}</h3>
+            <p class="timeline-nodo__desc">{item.descripcion}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .calendario-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+    margin-top: 1.5rem;
+  }
+
+  .timeline-nodo {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .timeline-nodo__marca {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .timeline-nodo__num {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-white);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(138, 21, 40, 0.3);
+    z-index: 2;
+  }
+
+  .timeline-nodo:nth-child(2) .timeline-nodo__num {
+    background: #15803D;
+    box-shadow: 0 0 10px rgba(21, 128, 61, 0.4);
+  }
+
+  .timeline-nodo__linea {
+    flex: 1;
+    width: 2px;
+    background: var(--color-border);
+    margin-top: 0.4rem;
+  }
+
+  .timeline-nodo:last-child .timeline-nodo__linea {
+    display: none;
+  }
+
+  .timeline-nodo__tarjeta {
+    flex: 1;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .timeline-nodo__tarjeta:hover {
+    transform: translateX(4px);
+    border-color: var(--color-primary-light);
+  }
+
+  .timeline-nodo__encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-nodo__badge {
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-alt);
+    color: var(--color-primary);
+  }
+
+  .timeline-nodo__fecha {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .timeline-nodo__titulo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-nodo__desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .timeline-nodo {
+      gap: 0.85rem;
+    }
+    .timeline-nodo__tarjeta {
+      padding: 1rem;
+    }
+  }
+</style>

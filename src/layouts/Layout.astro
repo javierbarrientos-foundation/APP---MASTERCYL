@@ -1,0 +1,114 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Becas MásterCyL 2026-2027 · Universidad de León | FGULEM",
+  description = "Convocatoria de 2 becas de 8.800 € para cursar estudios oficiales de máster en la Universidad de León dirigidas a oriundos de Castilla y León residentes en Hispanoamérica."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#8A1528" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Meta Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_ES" />
+    
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Cabecera Principal -->
+    <header class="cabecera" id="cabecera-principal">
+      <div class="cabecera__interior">
+        <div class="cabecera__logos">
+          <!-- Logotipo Junta de Castilla y León -->
+          <a href="https://comunicacion.jcyl.es" target="_blank" rel="noopener noreferrer" class="cabecera__logo-link" title="Junta de Castilla y León - Consejería de la Presidencia">
+            <img src="/img/logo-jcyl.png" alt="Logotipo Junta de Castilla y León" class="cabecera__logo-img" />
+          </a>
+          <span class="cabecera__separador" aria-hidden="true"></span>
+          <!-- Logotipo Fundación General de la Universidad de León y de la Empresa (FGULEM) -->
+          <a href="https://fgulem.unileon.es" target="_blank" rel="noopener noreferrer" class="cabecera__logo-link" title="Fundación General de la Universidad de León y de la Empresa (FGULEM)">
+            <img src="/img/logo-fgulem.png" alt="Logotipo FGULEM · Universidad de León" class="cabecera__logo-img" />
+          </a>
+          <span class="cabecera__separador" aria-hidden="true"></span>
+          <div class="cabecera__programa">
+            <span class="cabecera__programa-tag">Castilla y León en el Exterior</span>
+            <span class="cabecera__programa-titulo">Becas MásterCyL</span>
+          </div>
+        </div>
+
+        <div class="cabecera__acciones">
+          <a href="#contacto" class="btn-header-access">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Contacto</span>
+          </a>
+          <a href="https://sede.unileon.es" target="_blank" rel="noopener noreferrer" class="btn-header-access" title="Acceso al Registro Electrónico ULE">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Sede Electrónica</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Slot para el contenido principal -->
+    <slot />
+
+    <!-- Pie de Página -->
+    <footer class="pie" id="pie-principal">
+      <div class="pie__interior">
+        <div class="pie__col-principal">
+          <div class="pie__logos">
+            <img src="/img/logo-jcyl.png" alt="Junta de Castilla y León" class="pie__logo-img" />
+            <img src="/img/logo-fgulem.png" alt="FGULEM · Universidad de León" class="pie__logo-img" />
+          </div>
+          <p class="pie__desc">
+            Programa de becas de postgrado para personas oriundas o procedentes de Castilla y León residentes en Hispanoamérica. Convocatoria impulsada por la Consejería de la Presidencia de la Junta de Castilla y León en colaboración con la Fundación General de la Universidad de León y de la Empresa (FGULEM).
+          </p>
+        </div>
+
+        <div class="pie__col">
+          <h4>Navegación</h4>
+          <ul class="pie__links">
+            <li><a href="#resumen">Resumen de la convocatoria</a></li>
+            <li><a href="#bases">Bases reguladoras oficiales</a></li>
+            <li><a href="#calendario">Calendario y plazos</a></li>
+            <li><a href="#masteres">Másteres oficiales ofertados</a></li>
+            <li><a href="#preguntas">Preguntas frecuentes</a></li>
+            <li><a href="#contacto">Contacto y asistencia</a></li>
+          </ul>
+        </div>
+
+        <div class="pie__col">
+          <h4>Institucional</h4>
+          <ul class="pie__links">
+            <li><a href="https://fgulem.unileon.es" target="_blank" rel="noopener noreferrer">FGULEM - Web Oficial</a></li>
+            <li><a href="https://www.unileon.es" target="_blank" rel="noopener noreferrer">Universidad de León</a></li>
+            <li><a href="https://sede.unileon.es" target="_blank" rel="noopener noreferrer">Registro Electrónico ULE</a></li>
+            <li><a href="https://gobiernoabierto.jcyl.es" target="_blank" rel="noopener noreferrer">Acción Exterior Junta CyL</a></li>
+            <li><a href="https://www.tramitacastillayleon.jcyl.es" target="_blank" rel="noopener noreferrer">Sede Electrónica CyL</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pie__bottom">
+        <p>&copy; 2026 Fundación General de la Universidad de León y de la Empresa (FGULEM) & Junta de Castilla y León. Todos los derechos reservados.</p>
+        <p>Convocatoria MásterCyL Curso 2026-2027</p>
+      </div>
+    </footer>
+  </body>
+</html>

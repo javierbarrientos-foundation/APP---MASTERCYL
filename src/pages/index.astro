@@ -1,0 +1,258 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+import Menu from '../components/Menu.astro';
+import Resumen from '../components/secciones/Resumen.astro';
+import Bases from '../components/secciones/Bases.astro';
+import Calendario from '../components/secciones/Calendario.astro';
+import Masteres from '../components/secciones/Masteres.astro';
+import Preguntas from '../components/secciones/Preguntas.astro';
+import Contacto from '../components/secciones/Contacto.astro';
+---
+
+<Layout 
+  title="Becas MásterCyL 2026-2027 · Universidad de León | FGULEM"
+  description="Convocatoria de 2 becas de 8.800 € para cursar estudios oficiales de máster presenciales en la Universidad de León dirigidas a oriundos de Castilla y León residentes en Hispanoamérica."
+>
+  <main id="contenido" class="contenido">
+    <article class="convocatoria">
+      <!-- Banner superior de la convocatoria -->
+      <Banner />
+
+      <!-- Menú de navegación por pestañas -->
+      <Menu />
+
+      <!-- Contenedor dinámico de secciones -->
+      <div class="secciones">
+        <Resumen />
+        <Bases />
+        <Calendario />
+        <Masteres />
+        <Preguntas />
+        <Contacto />
+      </div>
+    </article>
+  </main>
+
+  <!-- Lógica JavaScript Vanilla: Gestión de Pestañas y Buscador de Másteres -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ========================================================
+         1. NAVEGACIÓN POR PESTAÑAS (TABS)
+         ======================================================== */
+      const menuLinks = document.querySelectorAll('.menu-secciones a');
+      const secciones = document.querySelectorAll('.secciones .seccion');
+
+      function activarSeccion(targetId, updateUrl = true) {
+        if (!targetId) return;
+        const idLimpio = targetId.replace('#', '');
+        const targetSection = document.getElementById(idLimpio);
+
+        if (!targetSection) return;
+
+        // Quitar aria-current del enlace anterior y asignarlo al nuevo
+        menuLinks.forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href === `#${idLimpio}`) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        // Ocultar todas las secciones y mostrar únicamente la seleccionada
+        secciones.forEach((sec) => {
+          sec.setAttribute('hidden', '');
+        });
+        targetSection.removeAttribute('hidden');
+
+        // Actualizar URL hash si se solicita
+        if (updateUrl && window.location.hash !== `#${idLimpio}`) {
+          history.pushState(null, '', `#${idLimpio}`);
+        }
+      }
+
+      // Manejar clics en los enlaces del menú de pestañas
+      menuLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetHref = link.getAttribute('href');
+          activarSeccion(targetHref, true);
+
+          // Scroll suave hacia la sección si está fuera de pantalla
+          const navElement = document.querySelector('.menu-secciones');
+          if (navElement) {
+            const rect = navElement.getBoundingClientRect();
+            if (rect.top < 0 || rect.top > 150) {
+              navElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+
+      // Manejar enlaces internos en la página (botones en banner, footer, avisos)
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        if (!anchor.closest('.menu-secciones')) {
+          anchor.addEventListener('click', (e) => {
+            const href = anchor.getAttribute('href');
+            if (href && href !== '#' && document.querySelector(`.secciones ${href}`)) {
+              e.preventDefault();
+              activarSeccion(href, true);
+              const target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
+          });
+        }
+      });
+
+      // Leer el hash de la URL al cargar la página
+      if (window.location.hash) {
+        activarSeccion(window.location.hash, false);
+      }
+
+      // Reaccionar a cambios en el historial (botón atrás/adelante)
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash) {
+          activarSeccion(window.location.hash, false);
+        }
+      });
+
+      /* ========================================================
+         2. BUSCADOR Y FILTROS DE MÁSTERES EN TIEMPO REAL
+         ======================================================== */
+      const buscadorInput = document.getElementById('buscador-masteres');
+      const btnLimpiar = document.getElementById('btn-limpiar-busqueda');
+      const botonesFiltro = document.querySelectorAll('.btn-filtro');
+      const masterCards = document.querySelectorAll('.master-card');
+      const contador = document.getElementById('contador-masteres');
+      const sinResultados = document.getElementById('sin-resultados');
+      const btnResetear = document.getElementById('btn-resetear-filtros');
+
+      let areaActiva = 'todas';
+      let terminoBusqueda = '';
+
+      function normalizar(texto) {
+        return (texto || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .trim();
+      }
+
+      function filtrarMasteres() {
+        const query = normalizar(terminoBusqueda);
+        let visibles = 0;
+
+        masterCards.forEach((card) => {
+          const cardArea = card.getAttribute('data-area');
+          const cardTitulo = normalizar(card.getAttribute('data-titulo'));
+          const cardDesc = normalizar(card.getAttribute('data-desc'));
+          const cardCentro = normalizar(card.getAttribute('data-centro'));
+
+          const coincideArea = (areaActiva === 'todas' || cardArea === areaActiva);
+          const coincideBusqueda = !query || 
+            cardTitulo.includes(query) || 
+            cardDesc.includes(query) || 
+            cardCentro.includes(query);
+
+          if (coincideArea && coincideBusqueda) {
+            card.style.display = 'flex';
+            visibles++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Actualizar contador
+        if (contador) {
+          contador.textContent = `Mostrando ${visibles} ${visibles === 1 ? 'máster oficial' : 'másteres oficiales'}`;
+        }
+
+        // Mostrar u ocultar mensaje sin resultados
+        if (sinResultados) {
+          sinResultados.style.display = visibles === 0 ? 'flex' : 'none';
+        }
+
+        // Mostrar u ocultar botón de limpiar búsqueda
+        if (btnLimpiar) {
+          btnLimpiar.style.display = terminoBusqueda.length > 0 ? 'flex' : 'none';
+        }
+      }
+
+      if (buscadorInput) {
+        buscadorInput.addEventListener('input', (e) => {
+          terminoBusqueda = e.target.value;
+          filtrarMasteres();
+        });
+      }
+
+      if (btnLimpiar) {
+        btnLimpiar.addEventListener('click', () => {
+          if (buscadorInput) {
+            buscadorInput.value = '';
+            terminoBusqueda = '';
+            buscadorInput.focus();
+            filtrarMasteres();
+          }
+        });
+      }
+
+      botonesFiltro.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          botonesFiltro.forEach((b) => b.classList.remove('activo'));
+          btn.classList.add('activo');
+          areaActiva = btn.getAttribute('data-area') || 'todas';
+          filtrarMasteres();
+        });
+      });
+
+      if (btnResetear) {
+        btnResetear.addEventListener('click', () => {
+          if (buscadorInput) buscadorInput.value = '';
+          terminoBusqueda = '';
+          areaActiva = 'todas';
+          botonesFiltro.forEach((b) => {
+            if (b.getAttribute('data-area') === 'todas') b.classList.add('activo');
+            else b.classList.remove('activo');
+          });
+          filtrarMasteres();
+        });
+      }
+
+      /* ========================================================
+         3. FORMULARIO DE CONTACTO (INTERACCIÓN FEEDBACK)
+         ======================================================== */
+      const formContacto = document.getElementById('formulario-contacto');
+      const mensajeExito = document.getElementById('mensaje-exito');
+
+      if (formContacto) {
+        formContacto.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const submitBtn = formContacto.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            submitBtn.innerHTML = '<span>Enviando consulta...</span>';
+          }
+
+          setTimeout(() => {
+            if (mensajeExito) {
+              mensajeExito.style.display = 'block';
+            }
+            formContacto.reset();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.style.opacity = '1';
+              submitBtn.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                <span>Enviar consulta a FGULEM</span>
+              `;
+            }
+          }, 600);
+        });
+      }
+    });
+  </script>
+</Layout>
