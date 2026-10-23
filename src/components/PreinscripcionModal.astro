@@ -4,184 +4,336 @@ import { masteresUsal } from '../data/masteresUsal';
 
 <dialog id="modal-preinscripcion" class="modal-dialog" aria-labelledby="modal-titulo">
   <div class="modal-contenedor">
-    <!-- Header del Modal -->
+    <!-- Header Oficial con Logos FGUSAL y Junta de Castilla y León -->
     <div class="modal-header">
-      <div class="modal-header__meta">
-        <div class="modal-tag">
-          <span class="modal-tag-dot" aria-hidden="true"></span>
-          <span>Convocatoria Oficial 2026-2027 · USAL</span>
-        </div>
-        <h2 id="modal-titulo" class="modal-titulo">Solicitud de Beca MásterCyL</h2>
+      <div class="modal-header__logos">
+        <img src="/img/logo-jcyl.png" alt="Junta de Castilla y León" class="modal-logo-img" />
+        <img src="/img/logo-fgusal.png" alt="Fundación General de la Universidad de Salamanca" class="modal-logo-img" />
       </div>
       <button type="button" id="btn-cerrar-modal" class="modal-cerrar" aria-label="Cerrar ventana">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
 
-    <!-- Introducción y Formulario Directo -->
-    <div class="modal-intro-caja">
-      <p class="modal-desc">
-        Cumplimenta los datos requeridos para registrar tu solicitud oficial de beca de postgrado en la Fundación General de la Universidad de Salamanca (FGUSAL).
+    <div class="modal-titulo-bloque">
+      <h2 id="modal-titulo" class="modal-titulo">
+        SOLICITUD DE BECA PARA CURSAR ESTUDIOS OFICIALES DE MÁSTER DE POSTGRADO EN LA UNIVERSIDAD DE SALAMANCA
+      </h2>
+      <p class="modal-subtitulo">
+        Dirigida a ciudadanos oriundos o procedentes de Castilla y León residentes en Hispanoamérica<br>
+        <strong>(Convenio con la Consejería de la Presidencia · Programa «MásterCyL 2026-2027»)</strong>
       </p>
     </div>
 
     <form id="form-preinscripcion" class="form-modal">
-        <!-- Bloque 1: Datos Personales -->
-        <div class="form-bloque">
-          <div class="form-bloque-titulo">
-            <span class="paso-num">1</span>
-            <span>Datos Personales del Solicitante</span>
-          </div>
+      <!-- 1. DATOS DE LA PERSONA SOLICITANTE -->
+      <div class="form-seccion-oficial">
+        <h3 class="form-seccion-header">DATOS DE LA PERSONA SOLICITANTE</h3>
 
-          <div class="form-fila">
-            <div class="form-grupo">
-              <label for="pre-nombre" class="form-label">
-                <span>Nombre</span>
-                <span class="req">* Obligatorio</span>
-              </label>
-              <div class="form-input-wrap">
-                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <input type="text" id="pre-nombre" name="nombre" class="form-input" placeholder="Ej. Carlos María" required autocomplete="given-name" />
-              </div>
-            </div>
-
-            <div class="form-grupo">
-              <label for="pre-apellidos" class="form-label">
-                <span>Apellidos</span>
-                <span class="req">* Obligatorio</span>
-              </label>
-              <div class="form-input-wrap">
-                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                <input type="text" id="pre-apellidos" name="apellidos" class="form-input" placeholder="Ej. Rodríguez López" required autocomplete="family-name" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-fila">
-            <div class="form-grupo">
-              <label for="pre-dni" class="form-label">
-                <span>DNI o Pasaporte Español</span>
-                <span class="req">* Obligatorio</span>
-              </label>
-              <div class="form-input-wrap">
-                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><line x1="15" y1="8" x2="17" y2="8"></line><line x1="15" y1="12" x2="17" y2="12"></line></svg>
-                <input type="text" id="pre-dni" name="dniPasaporte" class="form-input" placeholder="12345678Z o N.º Pasaporte" required />
-              </div>
-              <span class="form-helper">Debe acreditar nacionalidad española</span>
-            </div>
-
-            <div class="form-grupo">
-              <label for="pre-email" class="form-label">
-                <span>Correo Electrónico</span>
-                <span class="req">* Obligatorio</span>
-              </label>
-              <div class="form-input-wrap">
-                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <input type="email" id="pre-email" name="email" class="form-input" placeholder="carlos@ejemplo.com" required autocomplete="email" />
-              </div>
-              <span class="form-helper">Recibirás aquí el resguardo y avisos</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bloque 2: Residencia y Vinculación CyL -->
-        <div class="form-bloque">
-          <div class="form-bloque-titulo">
-            <span class="paso-num">2</span>
-            <span>Residencia en Hispanoamérica y Vinculación CyL</span>
-          </div>
-
-          <div class="form-fila">
-            <div class="form-grupo">
-              <label for="pre-pais" class="form-label">
-                <span>País de Residencia Actual</span>
-                <span class="req">* Obligatorio</span>
-              </label>
-              <div class="form-input-wrap">
-                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                <input type="text" id="pre-pais" name="paisResidencia" class="form-input" placeholder="Ej. Argentina, México, Chile..." required />
-              </div>
-            </div>
-
-            <div class="form-grupo">
-              <label for="pre-telefono" class="form-label">
-                <span>Teléfono con Prefijo Internacional</span>
-                <span class="badge-opcional">Opcional</span>
-              </label>
-              <div class="form-input-wrap">
-                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <input type="tel" id="pre-telefono" name="telefono" class="form-input" placeholder="+54 9 11 2345-6789" />
-              </div>
-            </div>
-          </div>
-
+        <div class="form-fila">
           <div class="form-grupo">
-            <label for="pre-vinculo" class="form-label">
-              <span>Condición con Castilla y León (Art. 2.3 Ley 8/2013)</span>
+            <label for="pre-nombre" class="form-label">
+              <span>Nombre:</span>
               <span class="req">* Obligatorio</span>
             </label>
-            <div class="form-input-wrap">
-              <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <select id="pre-vinculo" name="vinculoCyl" class="form-select" required>
-                <option value="">Selecciona cómo acreditas tu vinculación con CyL...</option>
-                <option value="Nacido en Castilla y León">Persona nacida en la Comunidad de Castilla y León</option>
-                <option value="Residencia 10 años continuados">Residente durante diez (10) años continuados en Castilla y León</option>
-                <option value="Descendiente de nacido en CyL">Descendiente directo (hijo/a, nieto/a) de persona nacida en Castilla y León</option>
-                <option value="Descendiente de residente 10 años">Descendiente directo de residente en CyL durante 10 años continuados</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bloque 3: Máster de Interés en la USAL -->
-        <div class="form-bloque">
-          <div class="form-bloque-titulo">
-            <span class="paso-num">3</span>
-            <span>Máster Universitario Oficial de Interés (USAL)</span>
+            <input type="text" id="pre-nombre" name="nombre" class="form-input" placeholder="Nombre de pila" required autocomplete="given-name" />
           </div>
 
           <div class="form-grupo">
-            <label for="pre-master" class="form-label">
-              <span>Selecciona o escribe el Máster de la Universidad de Salamanca</span>
-              <span class="badge-opcional">89 másteres oficiales</span>
+            <label for="pre-apellidos" class="form-label">
+              <span>Apellidos:</span>
+              <span class="req">* Obligatorio</span>
             </label>
-            <div class="form-input-wrap">
-              <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-              <input 
-                type="text" 
-                id="pre-master" 
-                name="masterInteres" 
-                class="form-input" 
-                list="lista-masteres-usal" 
-                placeholder="Escribe para buscar (ej. Inteligencia Artificial, Filosofía, MBA, Química...)" 
-              />
-            </div>
-            <datalist id="lista-masteres-usal">
-              {masteresUsal.map((m) => (
-                <option value={m.titulo}>{m.area} · {m.modalidad}</option>
-              ))}
-            </datalist>
-            <span class="form-helper">Debe ser un máster oficial de al menos 60 créditos ECTS presenciales en la USAL</span>
+            <input type="text" id="pre-apellidos" name="apellidos" class="form-input" placeholder="Primer y segundo apellido" required autocomplete="family-name" />
           </div>
         </div>
 
-        <!-- Botón de Envío -->
-        <button type="submit" id="btn-submit-preinscripcion" class="form-btn-submit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-          <span>Confirmar y Guardar Preinscripción en FGUSAL</span>
-        </button>
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label for="pre-dni" class="form-label">
+              <span>N.º DNI o Pasaporte:</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="text" id="pre-dni" name="dniPasaporte" class="form-input" placeholder="DNI o Pasaporte español" required />
+          </div>
 
-        <div id="resultado-preinscripcion" class="resultado-caja" style="display: none;"></div>
-      </form>
-    </div>
+          <div class="form-grupo">
+            <label for="pre-email" class="form-label">
+              <span>Correo Electrónico:</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="email" id="pre-email" name="email" class="form-input" placeholder="correo@ejemplo.com" required autocomplete="email" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="pre-telefono" class="form-label">
+              <span>Teléfono de Contacto:</span>
+              <span class="badge-opcional">Móvil / WhatsApp</span>
+            </label>
+            <input type="tel" id="pre-telefono" name="telefono" class="form-input" placeholder="+54 9 11 2345678" />
+          </div>
+        </div>
+
+        <!-- VÍNCULO CON CASTILLA Y LEÓN -->
+        <div class="form-grupo" style="margin-top: 1rem;">
+          <label class="form-label">
+            <span>VÍNCULO CON LA COMUNIDAD DE CASTILLA Y LEÓN:</span>
+            <span class="req">* Selecciona una opción</span>
+          </label>
+          <div class="opciones-vinculo">
+            <label class="radio-label">
+              <input type="radio" name="vinculoCyl" value="Nacido en la Comunidad de Castilla y León" required />
+              <span>Nacido en la Comunidad de Castilla y León.</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="vinculoCyl" value="Residente durante diez años continuados en la Comunidad de Castilla y León" />
+              <span>Residente durante diez años continuados en la Comunidad de Castilla y León.</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="vinculoCyl" value="Descendiente de nacido en la Comunidad de Castilla y León" />
+              <span>Descendiente de nacido en la Comunidad de Castilla y León.</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="vinculoCyl" value="Descendiente de residente durante diez años continuados en la Comunidad de Castilla y León" />
+              <span>Descendiente de residente durante diez años continuados en la Comunidad de Castilla y León.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-fila" style="margin-top: 1rem;">
+          <div class="form-grupo">
+            <label for="pre-dir-hispanoamerica" class="form-label">
+              <span>DIRECCIÓN POSTAL EN HISPANOAMÉRICA:</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="text" id="pre-dir-hispanoamerica" name="direccionHispanoamerica" class="form-input" placeholder="Calle, número, ciudad, país de residencia" required />
+          </div>
+
+          <div class="form-grupo">
+            <label for="pre-dir-cyl" class="form-label">
+              <span>DIRECCIÓN POSTAL EN LA COMUNIDAD DE CASTILLA Y LEÓN:</span>
+              <span class="badge-opcional">Si dispone de ella</span>
+            </label>
+            <input type="text" id="pre-dir-cyl" name="direccionCyl" class="form-input" placeholder="Dirección prevista o de empadronamiento en CyL" />
+          </div>
+        </div>
+
+        <div class="form-grupo" style="margin-top: 1rem;">
+          <label for="pre-titulacion" class="form-label">
+            <span>TITULACIÓN DE ACCESO A MÁSTER:</span>
+            <span class="req">* Obligatorio</span>
+          </label>
+          <input type="text" id="pre-titulacion" name="titulacionAcceso" class="form-input" placeholder="Grado, Licenciatura o titulación universitaria equivalente y Universidad de origen" required />
+        </div>
+
+        <!-- MÁSTER DE ELECCIÓN (PREFERENCIAS) -->
+        <div class="form-grupo" style="margin-top: 1.25rem;">
+          <label class="form-label">
+            <span>MÁSTER DE ELECCIÓN (régimen presencial, mínimo de 60 créditos ECTS):</span>
+            <span class="req">* Al menos la opción 1</span>
+          </label>
+          <div class="masteres-opciones-grid">
+            <div class="master-opcion-item">
+              <span class="opcion-num">1.</span>
+              <input 
+                type="text" 
+                id="pre-master-1" 
+                name="masterInteres" 
+                class="form-input" 
+                list="lista-masteres-presenciales" 
+                placeholder="1.ª Opción preferente (busca máster presencial de la USAL...)" 
+                required 
+              />
+            </div>
+            <div class="master-opcion-item">
+              <span class="opcion-num">2.</span>
+              <input 
+                type="text" 
+                id="pre-master-2" 
+                name="masterOpcion2" 
+                class="form-input" 
+                list="lista-masteres-presenciales" 
+                placeholder="2.ª Opción alternativa (opcional)" 
+              />
+            </div>
+            <div class="master-opcion-item">
+              <span class="opcion-num">3.</span>
+              <input 
+                type="text" 
+                id="pre-master-3" 
+                name="masterOpcion3" 
+                class="form-input" 
+                list="lista-masteres-presenciales" 
+                placeholder="3.ª Opción alternativa (opcional)" 
+              />
+            </div>
+          </div>
+          <datalist id="lista-masteres-presenciales">
+            {masteresUsal.map((m) => (
+              <option value={m.titulo}>{m.area} · 60 ECTS Presencial</option>
+            ))}
+          </datalist>
+          <span class="form-helper">Catálogo oficial filtrado: únicamente másteres en régimen 100% presencial de la USAL.</span>
+        </div>
+
+        <div class="form-grupo" style="margin-top: 1rem;">
+          <label for="pre-cuenta" class="form-label">
+            <span>N.º CUENTA CORRIENTE DE LA QUE ES TITULAR EN ESPAÑA (IBAN):</span>
+            <span class="badge-opcional">Si ya dispone de ella</span>
+          </label>
+          <input type="text" id="pre-cuenta" name="cuentaBancaria" class="form-input" placeholder="ES00 0000 0000 0000 0000 0000" />
+          <span class="form-helper">Necesario para el abono de la dotación económica tras la adjudicación definitiva.</span>
+        </div>
+      </div>
+
+      <!-- 2. DECLARO BAJO MI RESPONSABILIDAD -->
+      <div class="form-seccion-oficial">
+        <h3 class="form-seccion-header">DECLARO BAJO MI RESPONSABILIDAD</h3>
+        <div class="declaraciones-lista">
+          <label class="check-label">
+            <input type="checkbox" name="declaro_residencia" required checked />
+            <span><strong>1.</strong> Que resido en la Comunidad de Castilla y León, en los términos de la convocatoria, y me comprometo a residir en la misma durante el curso académico 2026/2027.</span>
+          </label>
+          <label class="check-label">
+            <input type="checkbox" name="declaro_matricula" required checked />
+            <span><strong>2.</strong> Que me encuentro matriculado en el máster de mi elección, en los términos de la convocatoria.</span>
+          </label>
+          <label class="check-label">
+            <input type="checkbox" name="declaro_cursar" required checked />
+            <span><strong>3.</strong> Que me comprometo a cursar las asignaturas objeto del máster.</span>
+          </label>
+          <label class="check-label">
+            <input type="checkbox" name="declaro_seguro" required checked />
+            <span><strong>4.</strong> Que dispongo o me comprometo a disponer de seguro médico, de deceso o repatriación; en los términos de la convocatoria.</span>
+          </label>
+          <div class="declaracion-ingresos-bloque">
+            <p style="margin: 0 0 0.5rem 0; font-weight: 600;">
+              <strong>5.</strong> La siguiente composición e ingresos brutos de la unidad familiar en el año 2025:
+            </p>
+            <div class="opciones-composicion">
+              <label class="radio-label">
+                <input type="radio" name="composicion_familiar" value="Unicamente solicitante" checked />
+                <span>Únicamente la persona solicitante.</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="composicion_familiar" value="Solicitante y otras personas" />
+                <span>La persona solicitante y otras personas (padre y/o madre, tutor o persona encargada de la guarda).</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. TABLA DE COMPOSICIÓN E INGRESOS FAMILIARES 2025 -->
+        <div class="tabla-familiar-wrap">
+          <h4 style="font-size: 0.875rem; text-transform: uppercase; color: #475569; margin: 0 0 0.75rem 0;">
+            Tabla de Ingresos Brutos de la Unidad Familiar (Año 2025)
+          </h4>
+          <table class="tabla-familiar">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Relación</th>
+                <th style="width: 22%;">Apellidos</th>
+                <th style="width: 18%;">Nombre</th>
+                <th style="width: 18%;">DNI / Pasaporte</th>
+                <th style="width: 10%;">¿Ingresos 2025?</th>
+                <th style="width: 14%;">Ingresos Brutos (moneda)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-familiar">
+              <tr>
+                <td><strong>Solicitante</strong></td>
+                <td><input type="text" name="fam_apellidos_0" class="input-tabla" placeholder="Apellidos" required /></td>
+                <td><input type="text" name="fam_nombre_0" class="input-tabla" placeholder="Nombre" required /></td>
+                <td><input type="text" name="fam_dni_0" class="input-tabla" placeholder="DNI/Pasaporte" required /></td>
+                <td>
+                  <select name="fam_percibido_0" class="select-tabla">
+                    <option value="SI">SÍ</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </td>
+                <td><input type="text" name="fam_ingresos_0" class="input-tabla" placeholder="Ej. 12.000 USD / €" /></td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" id="btn-add-familiar" class="btn-secundario-sm">
+            + Añadir otro miembro familiar
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. SOLICITO FORMAL -->
+      <div class="form-seccion-oficial">
+        <h3 class="form-seccion-header">SOLICITO</h3>
+        <p class="texto-solicito">
+          La concesión de una beca para cursar estudios oficiales de máster de postgrado en la Universidad de Salamanca, en el curso académico 2026-2027, dirigida a ciudadanos oriundos o procedentes de Castilla y León residentes en Hispanoamérica, en el marco del convenio con la Consejería de la Presidencia correspondiente al programa «MásterCyL», conforme a los datos consignados, para lo cual acompaño la documentación señalada en la convocatoria.
+        </p>
+
+        <div class="form-fila" style="margin-top: 1rem;">
+          <div class="form-grupo">
+            <label for="pre-lugar-firma" class="form-label">
+              <span>En (Ciudad de solicitud):</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="text" id="pre-lugar-firma" name="lugarFirma" class="form-input" placeholder="Ej. Buenos Aires, Salamanca, Bogotá..." required />
+          </div>
+          <div class="form-grupo">
+            <label class="form-label">
+              <span>Fecha:</span>
+            </label>
+            <input type="text" class="form-input" value="A fecha de registro telemático (2026)" readonly />
+          </div>
+        </div>
+
+        <!-- Protección de datos según modelo oficial -->
+        <div class="tabla-rgpd-wrap">
+          <div class="tabla-rgpd-header">INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS</div>
+          <table class="tabla-rgpd">
+            <tr>
+              <th>Responsable</th>
+              <td>Fundación General de la Universidad de Salamanca (FGUSAL).</td>
+            </tr>
+            <tr>
+              <th>Finalidad</th>
+              <td>Gestión, baremación y tramitación de la convocatoria de Becas MásterCyL 2026-2027.</td>
+            </tr>
+            <tr>
+              <th>Legitimación</th>
+              <td>Cumplimiento de una misión realizada en interés público y consentimiento del interesado.</td>
+            </tr>
+            <tr>
+              <th>Destinatarios</th>
+              <td>Junta de Castilla y León (Consejería de la Presidencia) y Universidad de Salamanca.</td>
+            </tr>
+            <tr>
+              <th>Derechos</th>
+              <td>Acceso, rectificación, supresión y demás derechos reconocidos ante FGUSAL (fonseca@usal.es).</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Botón de Envío Oficial -->
+      <div class="form-acciones">
+        <button type="submit" id="btn-submit-preinscripcion" class="form-btn-submit">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Presentar Solicitud Telemática Oficial</span>
+        </button>
+      </div>
+
+      <div id="resultado-preinscripcion" class="resultado-caja" style="display: none;"></div>
+    </form>
+  </div>
 </dialog>
+
+<!-- Plantilla oculta para impresión del Modelo Oficial -->
+<div id="impreso-oficial-imprimible" style="display: none;"></div>
 
 <style>
   .modal-dialog {
     border: none;
     background: transparent;
-    max-width: 740px;
-    width: 94%;
+    max-width: 860px;
+    width: 95%;
     margin: auto;
     padding: 0;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
@@ -190,7 +342,7 @@ import { masteresUsal } from '../data/masteresUsal';
   }
 
   .modal-dialog::backdrop {
-    background: rgba(15, 23, 42, 0.75);
+    background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
@@ -199,7 +351,7 @@ import { masteresUsal } from '../data/masteresUsal';
     background: #FFFFFF;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    padding: 2.25rem;
+    padding: 2.25rem 2.5rem;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
@@ -212,47 +364,29 @@ import { masteresUsal } from '../data/masteresUsal';
     top: 0;
     left: 0;
     right: 0;
-    height: 5px;
+    height: 6px;
     background: linear-gradient(90deg, #9E1B32 0%, #D4AF37 50%, #9E1B32 100%);
   }
 
   .modal-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.25rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid #E2E8F0;
   }
 
-  .modal-tag {
-    display: inline-flex;
+  .modal-header__logos {
+    display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-primary);
-    background: rgba(138, 21, 40, 0.08);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
+    gap: 1.5rem;
   }
 
-  .modal-tag-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-primary);
-  }
-
-  .modal-titulo {
-    font-size: 1.65rem;
-    color: #0F172A;
-    margin-top: 0.4rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+  .modal-logo-img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
   }
 
   .modal-cerrar {
@@ -277,108 +411,264 @@ import { masteresUsal } from '../data/masteresUsal';
     transform: rotate(90deg);
   }
 
-
-  .modal-intro-caja {
+  .modal-titulo-bloque {
+    text-align: center;
     background: #F8FAFC;
-    border-left: 3px solid var(--color-primary);
-    padding: 0.85rem 1.15rem;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    margin-bottom: 1.5rem;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
   }
 
-  .modal-desc {
-    font-size: 0.925rem;
-    color: #475569;
-    line-height: 1.55;
+  .modal-titulo {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .modal-subtitulo {
+    font-size: 0.825rem;
+    color: #64748B;
+    margin: 0.4rem 0 0 0;
+    line-height: 1.35;
+  }
+
+  .form-seccion-oficial {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .form-seccion-header {
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #9E1B32;
+    margin: 0 0 1.25rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #9E1B32;
+  }
+
+  .opciones-vinculo, .opciones-composicion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+    background: #F8FAFC;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid #E2E8F0;
+  }
+
+  .radio-label, .check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.875rem;
+    color: #334155;
+    cursor: pointer;
+    line-height: 1.45;
+  }
+
+  .radio-label input, .check-label input {
+    margin-top: 0.2rem;
+    accent-color: #9E1B32;
+    cursor: pointer;
+  }
+
+  .masteres-opciones-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+  }
+
+  .master-opcion-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .opcion-num {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #9E1B32;
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .declaraciones-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .declaracion-ingresos-bloque {
+    margin-top: 0.5rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed #CBD5E1;
+  }
+
+  .tabla-familiar-wrap {
+    margin-top: 1.25rem;
+    overflow-x: auto;
+  }
+
+  .tabla-familiar {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.825rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-familiar th, .tabla-familiar td {
+    border: 1px solid #CBD5E1;
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+  }
+
+  .tabla-familiar th {
+    background: #F1F5F9;
+    color: #0F172A;
+    font-weight: 700;
+  }
+
+  .input-tabla, .select-tabla {
+    width: 100%;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.825rem;
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .btn-secundario-sm {
+    background: #F8FAFC;
+    border: 1px dashed #9E1B32;
+    color: #9E1B32;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-md);
+    font-size: 0.825rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-secundario-sm:hover {
+    background: #9E1B32;
+    color: #FFFFFF;
+  }
+
+  .texto-solicito {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #334155;
+    background: #F8FAFC;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border-left: 3px solid #9E1B32;
     margin: 0;
   }
 
-  .code-badge {
-    font-family: monospace;
-    font-weight: 700;
-    color: var(--color-primary);
-    background: rgba(138, 21, 40, 0.08);
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
+  .tabla-rgpd-wrap {
+    margin-top: 1.25rem;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
 
-  .form-modal {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-bloque {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
-    border-radius: var(--radius-lg);
-    padding: 1.35rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    transition: border-color var(--transition-fast);
-  }
-
-  .form-bloque:focus-within {
-    border-color: rgba(138, 21, 40, 0.35);
-    background: #FFFFFF;
-  }
-
-  .form-bloque-titulo {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #0F172A;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px dashed #CBD5E1;
-  }
-
-  .paso-num {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--color-primary);
+  .tabla-rgpd-header {
+    background: #94A3B8;
     color: #FFFFFF;
+    font-weight: 700;
     font-size: 0.8rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .tabla-rgpd {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  .tabla-rgpd th, .tabla-rgpd td {
+    border-top: 1px solid #E2E8F0;
+    padding: 0.45rem 0.75rem;
+    text-align: left;
+  }
+
+  .tabla-rgpd th {
+    width: 25%;
+    background: #F8FAFC;
+    color: #475569;
+    font-weight: 600;
+  }
+
+  .tabla-rgpd td {
+    color: #334155;
+  }
+
+  .form-acciones {
+    margin-top: 1.75rem;
   }
 
   .resultado-caja {
-    padding: 1.35rem;
+    padding: 1.5rem;
     border-radius: var(--radius-lg);
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
     font-size: 0.95rem;
     line-height: 1.55;
-    animation: fadeIn 0.3s ease-out;
   }
 
   .resultado-caja--exito {
     background: #F0FDF4;
     border: 1.5px solid #86EFAC;
     color: #14532D;
-    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
   }
 
   .resultado-caja--error {
     background: #FEF2F2;
     border: 1.5px solid #FCA5A5;
     color: #991B1B;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+  .btn-imprimir-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #9E1B32;
+    color: #FFFFFF;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.925rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-imprimir-pdf:hover {
+    background: #7A1224;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(158, 27, 50, 0.25);
   }
 
   @media (max-width: 640px) {
     .modal-contenedor {
       padding: 1.25rem;
+    }
+    .modal-logo-img {
+      height: 38px;
     }
   }
 </style>

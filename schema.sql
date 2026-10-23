@@ -8,7 +8,15 @@ CREATE TABLE IF NOT EXISTS solicitudes (
   pais_residencia TEXT NOT NULL,
   telefono TEXT,
   master_interes TEXT,
+  master_opcion_2 TEXT,
+  master_opcion_3 TEXT,
   vinculo_cyl TEXT,
+  direccion_hispanoamerica TEXT,
+  direccion_cyl TEXT,
+  titulacion_acceso TEXT,
+  cuenta_bancaria TEXT,
+  composicion_familiar TEXT,
+  datos_completos TEXT,
   estado TEXT NOT NULL DEFAULT 'Preinscrito',
   created_at TEXT NOT NULL
 );

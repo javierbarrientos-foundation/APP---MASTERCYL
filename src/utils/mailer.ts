@@ -25,8 +25,15 @@ export interface DatosSolicitudEmail {
   email: string;
   telefono?: string;
   paisResidencia: string;
-  masterInteres?: string;
   vinculoCyl?: string;
+  direccionHispanoamerica?: string;
+  direccionCyl?: string;
+  titulacionAcceso?: string;
+  masterInteres?: string;
+  masterOpcion2?: string;
+  masterOpcion3?: string;
+  cuentaBancaria?: string;
+  composicionFamiliar?: string;
   fecha: string;
 }
 
@@ -88,11 +95,41 @@ function generarHtmlSolicitud(datos: DatosSolicitudEmail): string {
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Vinculación con CyL:</td>
-          <td style="padding: 8px 0; font-weight: 500;">${datos.vinculoCyl || 'No indicada'}</td>
+          <td style="padding: 8px 0; font-weight: 600; color: #9e1b32;">${datos.vinculoCyl || 'No indicada'}</td>
         </tr>
         <tr>
-          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Máster de Interés:</td>
-          <td style="padding: 8px 0; font-weight: 600; color: #800020;">${datos.masterInteres || 'No indicado'}</td>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Dirección Hispanoamérica:</td>
+          <td style="padding: 8px 0; font-weight: 500;">${datos.direccionHispanoamerica || datos.paisResidencia}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Dirección en CyL:</td>
+          <td style="padding: 8px 0; font-weight: 500;">${datos.direccionCyl || 'No indicada'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Titulación de Acceso:</td>
+          <td style="padding: 8px 0; font-weight: 600;">${datos.titulacionAcceso || 'No indicada'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Máster (Opción 1 - Preferente):</td>
+          <td style="padding: 8px 0; font-weight: 700; color: #9e1b32;">${datos.masterInteres || 'No indicado'}</td>
+        </tr>
+        ${datos.masterOpcion2 ? `
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Máster (Opción 2):</td>
+          <td style="padding: 8px 0; font-weight: 500;">${datos.masterOpcion2}</td>
+        </tr>` : ''}
+        ${datos.masterOpcion3 ? `
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Máster (Opción 3):</td>
+          <td style="padding: 8px 0; font-weight: 500;">${datos.masterOpcion3}</td>
+        </tr>` : ''}
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Cuenta Bancaria en España:</td>
+          <td style="padding: 8px 0; font-family: monospace;">${datos.cuentaBancaria || 'Pendiente de apertura'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Composición Familiar:</td>
+          <td style="padding: 8px 0;">${datos.composicionFamiliar || 'Únicamente la persona solicitante'}</td>
         </tr>
         <tr>
           <td style="padding: 8px 0; color: #64748b; font-weight: 500;">Fecha de Registro:</td>

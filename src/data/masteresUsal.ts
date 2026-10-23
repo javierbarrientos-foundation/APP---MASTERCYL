@@ -76,17 +76,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/estudios-avanzados-en-produccion-y-practicas-artisticas"
   },
   {
-    "id": "m-master-estudios-de-la-ciencia-la-tecnologia-y-la-innovacion",
-    "titulo": "Máster Universitario en Estudios de la Ciencia, la Tecnología y la Innovación",
-    "area": "Artes y Humanidades",
-    "areaCode": "humanidades",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Estudios de la Ciencia, la Tecnología y la Innovación impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-estudios-de-la-ciencia-la-tecnologia-y-la-innovacion"
-  },
-  {
     "id": "m-master-estudios-ingleses-avanzados-lenguas-y-culturas-en-contacto",
     "titulo": "Máster Universitario en Estudios Ingleses Avanzados: Lenguas y Culturas en Contacto",
     "area": "Artes y Humanidades",
@@ -131,17 +120,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-la-ensenanza-del-espanol-como-lengua-extranjera"
   },
   {
-    "id": "m-master-lengua-y-cultura-hispanicas",
-    "titulo": "Máster Universitario en Lengua y Cultura Hispánicas",
-    "area": "Artes y Humanidades",
-    "areaCode": "humanidades",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Lengua y Cultura Hispánicas impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-lengua-y-cultura-hispanicas"
-  },
-  {
     "id": "m-lenguas-culturas-y-sociedades-europeas-en-contacto",
     "titulo": "Máster Universitario en Lenguas, Culturas y Sociedades Europeas en Contacto / European Languages, Cultures and Societies in Contact",
     "area": "Artes y Humanidades",
@@ -164,17 +142,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-literatura-espanola-e-hispanoamericana-teoria-de-la-literatura-y-literatura-comparada"
   },
   {
-    "id": "m-master-logica-y-filosofia-de-la-ciencia",
-    "titulo": "Máster Universitario en Lógica y Filosofía de la Ciencia",
-    "area": "Artes y Humanidades",
-    "areaCode": "humanidades",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Lógica y Filosofía de la Ciencia impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-logica-y-filosofia-de-la-ciencia"
-  },
-  {
     "id": "m-master-musica-hispana",
     "titulo": "Máster Universitario en Música Hispana",
     "area": "Artes y Humanidades",
@@ -184,17 +151,6 @@ export const masteresUsal: Master[] = [
     "centro": "Universidad de Salamanca",
     "descripcion": "Enseñanza oficial de postgrado en Música Hispana impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
     "link": "https://usal.es/master-musica-hispana"
-  },
-  {
-    "id": "m-master-patrimonio-textual-y-humanidades-digitales",
-    "titulo": "Máster Universitario en Patrimonio Textual y Humanidades Digitales",
-    "area": "Artes y Humanidades",
-    "areaCode": "humanidades",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Patrimonio Textual y Humanidades Digitales impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-patrimonio-textual-y-humanidades-digitales"
   },
   {
     "id": "m-master-textos-de-la-antiguedad-clasica-y-su-pervivencia",
@@ -373,17 +329,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-quimica-teorica-y-modelizacion-computacional"
   },
   {
-    "id": "m-semiconductores-y-tecnologias-electronicas-hibrida-0",
-    "titulo": "Máster Universitario en Semiconductores y Tecnologías Electrónicas.",
-    "area": "Ciencias",
-    "areaCode": "ciencias",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Semiconductores y Tecnologías Electrónicas. impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/semiconductores-y-tecnologias-electronicas-hibrida-0"
-  },
-  {
     "id": "m-bienestar-lo-largo-de-la-vida-y-envejecimiento-saludablelifelong-well-being-and-healthy-ageing",
     "titulo": "Máster Universitario en Bienestar a lo largo de la Vida y Envejecimiento Saludable/Lifelong Well-being and Healthy Ageing",
     "area": "Ciencias de la Salud",
@@ -404,17 +349,6 @@ export const masteresUsal: Master[] = [
     "centro": "Universidad de Salamanca",
     "descripcion": "Enseñanza oficial de postgrado en Biología y Clínica del Cáncer impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
     "link": "https://usal.es/master-biologia-y-clinica-del-cancer"
-  },
-  {
-    "id": "m-diseno-de-intervenciones-sobre-estilos-de-vida-saludables-hibrida",
-    "titulo": "Máster Universitario en Diseño de Intervenciones sobre Estilos de Vida Saludables",
-    "area": "Ciencias de la Salud",
-    "areaCode": "salud",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Diseño de Intervenciones sobre Estilos de Vida Saludables impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/diseno-de-intervenciones-sobre-estilos-de-vida-saludables-hibrida"
   },
   {
     "id": "m-master-enfermedades-tropicales",
@@ -527,17 +461,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-analisis-economico-del-derecho-y-las-politicas-publicas"
   },
   {
-    "id": "m-master-antropologia-aplicada-salud-y-desarrollo-comunitario",
-    "titulo": "Máster Universitario en Antropología Aplicada: Salud y Desarrollo Comunitario",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Antropología Aplicada: Salud y Desarrollo Comunitario impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-antropologia-aplicada-salud-y-desarrollo-comunitario"
-  },
-  {
     "id": "m-cibercriminalidad",
     "titulo": "Máster Universitario en Cibercriminalidad",
     "area": "Ciencias Sociales y Jurídicas",
@@ -547,17 +470,6 @@ export const masteresUsal: Master[] = [
     "centro": "Universidad de Salamanca",
     "descripcion": "Enseñanza oficial de postgrado en Cibercriminalidad impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
     "link": "https://usal.es/cibercriminalidad"
-  },
-  {
-    "id": "m-ciencia-de-datos-aplicada-las-ciencias-sociales-hibrida-0",
-    "titulo": "Máster Universitario en Ciencia de Datos Aplicada a las Ciencias Sociales",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Ciencia de Datos Aplicada a las Ciencias Sociales impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/ciencia-de-datos-aplicada-las-ciencias-sociales-hibrida-0"
   },
   {
     "id": "m-master-ciencia-politica",
@@ -580,17 +492,6 @@ export const masteresUsal: Master[] = [
     "centro": "Universidad de Salamanca",
     "descripcion": "Enseñanza oficial de postgrado en Comunicación Audiovisual: Investigación e Innovación impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
     "link": "https://usal.es/master-comunicacion-audiovisual-investigacion-e-innovacion"
-  },
-  {
-    "id": "m-master-cooperacion-internacional-para-el-desarrollo",
-    "titulo": "Máster Universitario en Cooperación Internacional para el Desarrollo",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Cooperación Internacional para el Desarrollo impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-cooperacion-internacional-para-el-desarrollo"
   },
   {
     "id": "m-master-democracia-y-buen-gobierno",
@@ -635,28 +536,6 @@ export const masteresUsal: Master[] = [
     "centro": "Universidad de Salamanca",
     "descripcion": "Enseñanza oficial de postgrado en Derecho Privado Patrimonial impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
     "link": "https://usal.es/master-derecho-privado-patrimonial"
-  },
-  {
-    "id": "m-derechos-humanos-e-igualdad-en-el-ambito-de-la-funcion-policial-virtual",
-    "titulo": "Máster Universitario en Derechos Humanos e Igualdad en el Ámbito de la Función Policial",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Derechos Humanos e Igualdad en el Ámbito de la Función Policial impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/derechos-humanos-e-igualdad-en-el-ambito-de-la-funcion-policial-virtual"
-  },
-  {
-    "id": "m-derechos-humanos-sostenibilidad-y-justicia-climatica-hibrida",
-    "titulo": "Máster Universitario en Derechos Humanos, Sostenibilidad y Justicia Climática",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Derechos Humanos, Sostenibilidad y Justicia Climática impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/derechos-humanos-sostenibilidad-y-justicia-climatica-hibrida"
   },
   {
     "id": "m-master-estrategias-anticorrupcion-y-politicas-de-integridad",
@@ -747,50 +626,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-estudios-latinoamericanos"
   },
   {
-    "id": "m-master-evaluacion-e-investigacion-en-organizaciones-y-contextos-de-aprendizaje-mievinap-online",
-    "titulo": "Máster Universitario en Evaluación e Investigación en Organizaciones y Contextos de Aprendizaje",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Evaluación e Investigación en Organizaciones y Contextos de Aprendizaje impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-evaluacion-e-investigacion-en-organizaciones-y-contextos-de-aprendizaje-mievinap-online"
-  },
-  {
-    "id": "m-master-gestion-administrativa",
-    "titulo": "Máster Universitario en Gestión Administrativa",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Gestión Administrativa impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-gestion-administrativa"
-  },
-  {
-    "id": "m-innovacion-en-didacticas-especificas-educacion-infantil-y-primaria-virtual",
-    "titulo": "Máster Universitario en Innovación en Didácticas Específicas para Educación Infantil y Primaria",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Innovación en Didácticas Específicas para Educación Infantil y Primaria impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/innovacion-en-didacticas-especificas-educacion-infantil-y-primaria-virtual"
-  },
-  {
-    "id": "m-intervencion-social-y-educativa-con-infancia-adolescencia-hibrida",
-    "titulo": "Máster Universitario en Intervención Social y Educativa con Infancia y Adolescencia",
-    "area": "Ciencias Sociales y Jurídicas",
-    "areaCode": "sociales",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Intervención Social y Educativa con Infancia y Adolescencia impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/intervencion-social-y-educativa-con-infancia-adolescencia-hibrida"
-  },
-  {
     "id": "m-master-investigacion-en-administracion-y-economia-de-la-empresa",
     "titulo": "Máster Universitario en Investigación en Administración y Economía de la Empresa",
     "area": "Ciencias Sociales y Jurídicas",
@@ -868,61 +703,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-sistemas-de-informacion-digital"
   },
   {
-    "id": "m-ciberdelincuencia-en-el-ambito-de-la-funcion-policial-virtual",
-    "titulo": "Máster Universitario en Ciberdelincuencia en el Ámbito de la Función Policial",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Ciberdelincuencia en el Ámbito de la Función Policial impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/ciberdelincuencia-en-el-ambito-de-la-funcion-policial-virtual"
-  },
-  {
-    "id": "m-ciberseguridad",
-    "titulo": "Máster Universitario en Ciberseguridad",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Ciberseguridad impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/ciberseguridad"
-  },
-  {
-    "id": "m-ciencia-de-datos-e-inteligencia-artificial-aplicada-la-ingenieria-virtual",
-    "titulo": "Máster Universitario en Ciencia de Datos e Inteligencia Artificial Aplicada a la Ingeniería",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Ciencia de Datos e Inteligencia Artificial Aplicada a la Ingeniería impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/ciencia-de-datos-e-inteligencia-artificial-aplicada-la-ingenieria-virtual"
-  },
-  {
-    "id": "m-master-geotecnologias-cartograficas-en-ingenieria-y-arquitectura",
-    "titulo": "Máster Universitario en Geotecnologías Cartográficas en Ingeniería y Arquitectura",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Geotecnologías Cartográficas en Ingeniería y Arquitectura impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-geotecnologias-cartograficas-en-ingenieria-y-arquitectura"
-  },
-  {
-    "id": "m-gestion-de-la-transicion-energetica-virtual-0",
-    "titulo": "Máster Universitario en Gestión de la Transición Energética",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Gestión de la Transición Energética impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/gestion-de-la-transicion-energetica-virtual-0"
-  },
-  {
     "id": "m-master-ingenieria-agronomica",
     "titulo": "Máster Universitario en Ingeniería Agronómica",
     "area": "Ingeniería y Arquitectura",
@@ -945,17 +725,6 @@ export const masteresUsal: Master[] = [
     "link": "https://usal.es/master-ingenieria-industrial"
   },
   {
-    "id": "m-master-ingenieria-informatica",
-    "titulo": "Máster Universitario en Ingeniería Informática",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Híbrida",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Ingeniería Informática impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/master-ingenieria-informatica"
-  },
-  {
     "id": "m-ingenieria-mecatronica",
     "titulo": "Máster Universitario en Ingeniería Mecatrónica",
     "area": "Ingeniería y Arquitectura",
@@ -976,17 +745,6 @@ export const masteresUsal: Master[] = [
     "centro": "Universidad de Salamanca",
     "descripcion": "Enseñanza oficial de postgrado en Ingeniería Química impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
     "link": "https://usal.es/master-ingenieria-quimica"
-  },
-  {
-    "id": "m-modelizacion-de-sistemas-hidricos-online",
-    "titulo": "Máster Universitario en Modelización de Sistemas Hídricos",
-    "area": "Ingeniería y Arquitectura",
-    "areaCode": "ingenieria",
-    "creditos": 60,
-    "modalidad": "Virtual / Online",
-    "centro": "Universidad de Salamanca",
-    "descripcion": "Enseñanza oficial de postgrado en Modelización de Sistemas Hídricos impartida por la Universidad de Salamanca, con profesorado de excelencia y orientación investigadora y profesional.",
-    "link": "https://usal.es/modelizacion-de-sistemas-hidricos-online"
   },
   {
     "id": "m-master-sistemas-inteligentes",
