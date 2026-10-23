@@ -11,36 +11,21 @@ import { masteresUsal } from '../data/masteresUsal';
           <span class="modal-tag-dot" aria-hidden="true"></span>
           <span>Convocatoria Oficial 2026-2027 · USAL</span>
         </div>
-        <h2 id="modal-titulo" class="modal-titulo">Plataforma Becas MásterCyL</h2>
+        <h2 id="modal-titulo" class="modal-titulo">Solicitud de Beca MásterCyL</h2>
       </div>
       <button type="button" id="btn-cerrar-modal" class="modal-cerrar" aria-label="Cerrar ventana">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
 
-    <!-- Pestañas tipo Segmented Switch moderno -->
-    <div class="modal-switch-wrap">
-      <div class="modal-switch" role="tablist">
-        <button type="button" id="tab-modal-nuevo" class="tab-modal activo" role="tab" aria-selected="true">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-          <span>Nueva Preinscripción</span>
-        </button>
-        <button type="button" id="tab-modal-consulta" class="tab-modal" role="tab" aria-selected="false">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <span>Consultar Estado</span>
-        </button>
-      </div>
+    <!-- Introducción y Formulario Directo -->
+    <div class="modal-intro-caja">
+      <p class="modal-desc">
+        Cumplimenta los datos requeridos para registrar tu solicitud oficial de beca de postgrado en la Fundación General de la Universidad de Salamanca (FGUSAL).
+      </p>
     </div>
 
-    <!-- Panel 1: Nueva Preinscripción -->
-    <div id="panel-modal-nuevo" class="modal-panel">
-      <div class="modal-intro-caja">
-        <p class="modal-desc">
-          Cumplimenta los datos iniciales para registrar tu expediente telemático en la Fundación General de la Universidad de Salamanca (FGUSAL).
-        </p>
-      </div>
-
-      <form id="form-preinscripcion" class="form-modal">
+    <form id="form-preinscripcion" class="form-modal">
         <!-- Bloque 1: Datos Personales -->
         <div class="form-bloque">
           <div class="form-bloque-titulo">
@@ -189,36 +174,6 @@ import { masteresUsal } from '../data/masteresUsal';
         <div id="resultado-preinscripcion" class="resultado-caja" style="display: none;"></div>
       </form>
     </div>
-
-    <!-- Panel 2: Consultar Estado -->
-    <div id="panel-modal-consulta" class="modal-panel" style="display: none;">
-      <div class="modal-intro-caja">
-        <p class="modal-desc">
-          Introduce tu DNI/Pasaporte o tu código de seguimiento (ej. <code class="code-badge">MCYL-2026-XXXX</code>) para comprobar en tiempo real el estado de tu preinscripción en la base de datos de FGUSAL.
-        </p>
-      </div>
-
-      <form id="form-consulta-estado" class="form-modal">
-        <div class="form-grupo">
-          <label for="consulta-identificador" class="form-label">
-            <span>DNI / Pasaporte o Código de Solicitud</span>
-            <span class="req">* Obligatorio</span>
-          </label>
-          <div class="form-input-wrap">
-            <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="consulta-identificador" class="form-input" placeholder="Ej. 12345678Z o MCYL-2026-9789" required />
-          </div>
-        </div>
-
-        <button type="submit" id="btn-submit-consulta" class="form-btn-submit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <span>Consultar Estado en la Base de Datos</span>
-        </button>
-
-        <div id="resultado-consulta" class="resultado-caja" style="display: none;"></div>
-      </form>
-    </div>
-  </div>
 </dialog>
 
 <style>
@@ -322,46 +277,6 @@ import { masteresUsal } from '../data/masteresUsal';
     transform: rotate(90deg);
   }
 
-  /* Segmented switch tab bar */
-  .modal-switch-wrap {
-    margin-bottom: 1.75rem;
-  }
-
-  .modal-switch {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.35rem;
-    background: #F1F5F9;
-    padding: 0.35rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid #E2E8F0;
-  }
-
-  .tab-modal {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: transparent;
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #64748B;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-  }
-
-  .tab-modal.activo {
-    background: #FFFFFF;
-    color: var(--color-primary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-
-  .tab-modal:hover:not(.activo) {
-    color: #1E293B;
-  }
 
   .modal-intro-caja {
     background: #F8FAFC;
@@ -464,9 +379,6 @@ import { masteresUsal } from '../data/masteresUsal';
   @media (max-width: 640px) {
     .modal-contenedor {
       padding: 1.25rem;
-    }
-    .modal-switch {
-      grid-template-columns: 1fr;
     }
   }
 </style>

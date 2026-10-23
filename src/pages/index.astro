@@ -96,7 +96,7 @@ import PreinscripcionModal from '../components/PreinscripcionModal.astro';
 
       // Manejar enlaces internos en la página (footer, avisos, etc.)
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        if (!anchor.closest('.menu-secciones') && anchor.id !== 'btn-preinscripcion' && anchor.id !== 'btn-acceso') {
+        if (!anchor.closest('.menu-secciones') && anchor.id !== 'btn-preinscripcion') {
           anchor.addEventListener('click', (e) => {
             const href = anchor.getAttribute('href');
             if (href && href !== '#' && document.querySelector(`.secciones ${href}`)) {
@@ -223,41 +223,20 @@ import PreinscripcionModal from '../components/PreinscripcionModal.astro';
       }
 
       /* ========================================================
-         3. MODAL DE PREINSCRIPCIÓN Y ACCESO
+         3. MODAL DE SOLICITUD DE BECA
          ======================================================== */
       const modal = document.getElementById('modal-preinscripcion');
       const btnPreinscripcion = document.getElementById('btn-preinscripcion');
-      const btnAcceso = document.getElementById('btn-acceso');
       const btnCerrarModal = document.getElementById('btn-cerrar-modal');
-      const tabModalNuevo = document.getElementById('tab-modal-nuevo');
-      const tabModalConsulta = document.getElementById('tab-modal-consulta');
-      const panelModalNuevo = document.getElementById('panel-modal-nuevo');
-      const panelModalConsulta = document.getElementById('panel-modal-consulta');
 
-      function abrirModal(pestaña = 'nuevo') {
+      function abrirModal() {
         if (!modal) return;
-        if (pestaña === 'nuevo') {
-          tabModalNuevo?.classList.add('activo');
-          tabModalConsulta?.classList.remove('activo');
-          if (panelModalNuevo) panelModalNuevo.style.display = 'block';
-          if (panelModalConsulta) panelModalConsulta.style.display = 'none';
-        } else {
-          tabModalConsulta?.classList.add('activo');
-          tabModalNuevo?.classList.remove('activo');
-          if (panelModalConsulta) panelModalConsulta.style.display = 'block';
-          if (panelModalNuevo) panelModalNuevo.style.display = 'none';
-        }
         modal.showModal();
       }
 
       btnPreinscripcion?.addEventListener('click', (e) => {
         e.preventDefault();
-        abrirModal('nuevo');
-      });
-
-      btnAcceso?.addEventListener('click', (e) => {
-        e.preventDefault();
-        abrirModal('consulta');
+        abrirModal();
       });
 
       btnCerrarModal?.addEventListener('click', () => {
@@ -275,20 +254,6 @@ import PreinscripcionModal from '../components/PreinscripcionModal.astro';
         if (!isInDialog) {
           modal.close();
         }
-      });
-
-      tabModalNuevo?.addEventListener('click', () => {
-        tabModalNuevo.classList.add('activo');
-        tabModalConsulta?.classList.remove('activo');
-        if (panelModalNuevo) panelModalNuevo.style.display = 'block';
-        if (panelModalConsulta) panelModalConsulta.style.display = 'none';
-      });
-
-      tabModalConsulta?.addEventListener('click', () => {
-        tabModalConsulta.classList.add('activo');
-        tabModalNuevo?.classList.remove('activo');
-        if (panelModalConsulta) panelModalConsulta.style.display = 'block';
-        if (panelModalNuevo) panelModalNuevo.style.display = 'none';
       });
 
       /* ========================================================
@@ -367,66 +332,7 @@ import PreinscripcionModal from '../components/PreinscripcionModal.astro';
       }
 
       /* ========================================================
-         5. CONSULTA DE ESTADO DE SOLICITUD (API / DB)
-         ======================================================== */
-      const formConsulta = document.getElementById('form-consulta-estado');
-      const inputConsulta = document.getElementById('consulta-identificador');
-      const resultadoConsulta = document.getElementById('resultado-consulta');
-      const btnSubmitConsulta = document.getElementById('btn-submit-consulta');
-
-      if (formConsulta) {
-        formConsulta.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const query = inputConsulta?.value?.trim();
-          if (!query || !btnSubmitConsulta) return;
-
-          btnSubmitConsulta.disabled = true;
-          btnSubmitConsulta.style.opacity = '0.7';
-          btnSubmitConsulta.innerHTML = '<span>Consultando base de datos...</span>';
-          if (resultadoConsulta) resultadoConsulta.style.display = 'none';
-
-          try {
-            const resp = await fetch(`/api/preinscripcion?q=${encodeURIComponent(query)}`);
-            const data = await resp.json();
-
-            if (resultadoConsulta) {
-              resultadoConsulta.style.display = 'block';
-              if (data.success && data.solicitud) {
-                const s = data.solicitud;
-                resultadoConsulta.className = 'resultado-caja resultado-caja--exito';
-                resultadoConsulta.innerHTML = `
-                  <strong>Solicitud localizada:</strong>
-                  <div style="margin-top: 0.5rem; padding: 0.75rem; background: rgba(255,255,255,0.7); border-radius: 6px;">
-                    <div><strong>Código:</strong> <span style="font-family: monospace;">${s.codigo}</span></div>
-                    <div><strong>Solicitante:</strong> ${s.nombre}</div>
-                    <div><strong>Estado actual:</strong> <span style="font-weight: 700; color: #15803D;">${s.estado}</span></div>
-                    <div><strong>Fecha de registro:</strong> ${new Date(s.createdAt).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
-                  </div>
-                `;
-              } else {
-                resultadoConsulta.className = 'resultado-caja resultado-caja--error';
-                resultadoConsulta.innerHTML = `<strong>✕ ${data.error || 'No se encontró ninguna solicitud registrada.'}</strong>`;
-              }
-            }
-          } catch (err) {
-            if (resultadoConsulta) {
-              resultadoConsulta.style.display = 'block';
-              resultadoConsulta.className = 'resultado-caja resultado-caja--error';
-              resultadoConsulta.innerHTML = '<strong>✕ Error:</strong> No se pudo conectar con el servidor.';
-            }
-          } finally {
-            btnSubmitConsulta.disabled = false;
-            btnSubmitConsulta.style.opacity = '1';
-            btnSubmitConsulta.innerHTML = `
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <span>Consultar Estado</span>
-            `;
-          }
-        });
-      }
-
-      /* ========================================================
-         6. ENVÍO DEL FORMULARIO DE CONTACTO (API / DB)
+         5. ENVÍO DEL FORMULARIO DE CONTACTO (API / DB)
          ======================================================== */
       const formContacto = document.getElementById('formulario-contacto');
       const mensajeExito = document.getElementById('mensaje-exito');
