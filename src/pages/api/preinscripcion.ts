@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 import { getDatabase } from '../../db';
+import { enviarNotificacion } from '../../utils/mailer';
 
 export const prerender = false;
 
@@ -85,6 +87,31 @@ export const POST: APIRoute = async (context) => {
         vinculoCyl ? vinculoCyl.trim() : null,
         timestamp
       ).run();
+
+      // Notificación automática por email a:
+      // 1. Alberto Hernández Gudino (ahgudino@usal.es)
+      // 2. Pilar Poveda Bueno (ppoveda@usal.es)
+      // 3. Javier Barrientos (javier.barrientos@fundacionusal.es)
+      try {
+        await enviarNotificacion({
+          tipo: 'solicitud',
+          datos: {
+            codigo,
+            nombre: nombre.trim(),
+            apellidos: apellidos.trim(),
+            dniPasaporte: dniLimpio,
+            email: emailLimpio,
+            telefono: telefono ? telefono.trim() : undefined,
+            paisResidencia: paisResidencia.trim(),
+            masterInteres: masterInteres ? masterInteres.trim() : undefined,
+            vinculoCyl: vinculoCyl ? vinculoCyl.trim() : undefined,
+            fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })
+          },
+          env
+        });
+      } catch (mailError) {
+        console.warn('Aviso: no se pudo despachar el correo de solicitud (no bloqueante):', mailError);
+      }
 
       return new Response(
         JSON.stringify({
