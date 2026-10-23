@@ -3,7 +3,10 @@
  * Destinatarios oficiales configurados:
  * 1. Alberto Hernández Gudino (ahgudino@usal.es)
  * 2. Pilar Poveda Bueno - Responsable de Prácticas formativas (ppoveda@usal.es)
- * 3. Javier Barrientos - Programador de la app (javier.barrientos@fundacionusal.es)
+ *
+ * Envío: Cloudflare Email Service (binding `EMAIL` en wrangler.toml), remitente mastercyl@fundacionusal.es.
+ * En el plan gratuito solo se puede enviar a direcciones verificadas en Email Routing:
+ * si se añade un destinatario aquí, hay que añadirlo también en wrangler.toml y verificarlo en Cloudflare.
  */
 
 export interface Destinatario {
@@ -13,9 +16,10 @@ export interface Destinatario {
 
 export const DESTINATARIOS_OFICIALES: Destinatario[] = [
   { nombre: 'Alberto Hernández Gudino', email: 'ahgudino@usal.es' },
-  { nombre: 'Pilar Poveda Bueno', email: 'ppoveda@usal.es' },
-  { nombre: 'Javier Barrientos', email: 'javier.barrientos@fundacionusal.es' }
+  { nombre: 'Pilar Poveda Bueno', email: 'ppoveda@usal.es' }
 ];
+
+export const REMITENTE = { email: 'mastercyl@fundacionusal.es', name: 'Becas MásterCyL (FGUSAL)' };
 
 export interface DatosSolicitudEmail {
   codigo: string;
@@ -156,7 +160,7 @@ function generarHtmlSolicitud(datos: DatosSolicitudEmail): string {
     </div>
 
     <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 16px 32px; font-size: 12px; color: #64748b; text-align: center;">
-      Notificación automática remitida a: Alberto Hernández Gudino · Pilar Poveda Bueno · Javier Barrientos<br>
+      Notificación automática remitida a: Alberto Hernández Gudino · Pilar Poveda Bueno<br>
       © 2026 Fundación General de la Universidad de Salamanca (FGUSAL)
     </div>
   </div>
@@ -217,7 +221,7 @@ function generarHtmlContacto(datos: DatosContactoEmail): string {
     </div>
 
     <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 16px 32px; font-size: 12px; color: #64748b; text-align: center;">
-      Notificación automática remitida a: Alberto Hernández Gudino · Pilar Poveda Bueno · Javier Barrientos<br>
+      Notificación automática remitida a: Alberto Hernández Gudino · Pilar Poveda Bueno<br>
       © 2026 Fundación General de la Universidad de Salamanca (FGUSAL)
     </div>
   </div>
@@ -250,91 +254,27 @@ export async function enviarNotificacion({
   // Registro en consola de la recepción y datos para auditoría
   console.log(`[NOTIFICACIÓN EMAIL] Despachando ${tipo} para:`, listaEmails.join(', '));
 
-  // 1. Intentar mediante Resend API si existe RESEND_API_KEY
-  const resendApiKey = env?.RESEND_API_KEY || (typeof process !== 'undefined' ? process.env?.RESEND_API_KEY : undefined);
-  if (resendApiKey) {
-    try {
-      const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${resendApiKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          from: env?.EMAIL_FROM || 'Becas MásterCyL <onboarding@resend.dev>',
-          to: listaEmails,
-          subject: asunto,
-          html: htmlContent
-        })
-      });
-
-      if (res.ok) {
-        console.log(`[NOTIFICACIÓN EMAIL] Enviado con éxito vía Resend.`);
-        return { enviado: true, metodo: 'resend' };
-      } else {
-        const errorText = await res.text();
-        console.warn(`[NOTIFICACIÓN EMAIL] Error Resend:`, errorText);
-      }
-    } catch (e: any) {
-      console.warn(`[NOTIFICACIÓN EMAIL] Fallo al llamar a Resend:`, e?.message);
-    }
-  }
-
-  // 2. Intentar mediante Cloudflare Workers Send Email binding si está presente
+  // Envío mediante Cloudflare Email Service (binding EMAIL). No se usan servicios externos (RGPD).
   if (env?.EMAIL?.send) {
-    try {
-      for (const dest of DESTINATARIOS_OFICIALES) {
-        // Enviar vía Cloudflare Email Routing binding
+    let enviados = 0;
+    for (const dest of DESTINATARIOS_OFICIALES) {
+      try {
         await env.EMAIL.send({
-          from: 'notificaciones@mastercyl.fundacion.usal.es',
+          from: REMITENTE,
           to: dest.email,
           subject: asunto,
-          text: `Se ha recibido una nueva ${tipo}. Por favor consulte el panel de administración o su cliente HTML.`,
+          text: `Se ha recibido una nueva ${tipo} en la web de Becas MásterCyL. Abra este correo en un cliente compatible con HTML para ver el detalle.`,
           html: htmlContent
         });
+        enviados++;
+      } catch (e: any) {
+        console.warn(`[NOTIFICACIÓN EMAIL] Fallo al enviar a ${dest.email}:`, e?.message);
       }
+    }
+    if (enviados > 0) {
+      console.log(`[NOTIFICACIÓN EMAIL] Enviado a ${enviados}/${DESTINATARIOS_OFICIALES.length} destinatarios.`);
       return { enviado: true, metodo: 'cloudflare-email' };
-    } catch (e: any) {
-      console.warn(`[NOTIFICACIÓN EMAIL] Fallo en binding env.EMAIL:`, e?.message);
     }
-  }
-
-  // 3. Intentar mediante MailChannels API (estándar nativo para Cloudflare Workers)
-  try {
-    const mcRes = await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: DESTINATARIOS_OFICIALES.map(d => ({ email: d.email, name: d.nombre }))
-          }
-        ],
-        from: {
-          email: 'notificaciones@mastercyl.fundacion.usal.es',
-          name: 'Becas MásterCyL (FGUSAL)'
-        },
-        subject: asunto,
-        content: [
-          {
-            type: 'text/html',
-            value: htmlContent
-          }
-        ]
-      })
-    });
-
-    if (mcRes.status === 202 || mcRes.ok) {
-      console.log(`[NOTIFICACIÓN EMAIL] Enviado con éxito vía MailChannels.`);
-      return { enviado: true, metodo: 'mailchannels' };
-    } else {
-      const mcErr = await mcRes.text();
-      console.log(`[NOTIFICACIÓN EMAIL] MailChannels status ${mcRes.status}:`, mcErr);
-    }
-  } catch (e: any) {
-    console.warn(`[NOTIFICACIÓN EMAIL] Error al intentar MailChannels:`, e?.message);
   }
 
   // 4. Registro y trazabilidad asegurada
@@ -342,6 +282,6 @@ export async function enviarNotificacion({
   return { 
     enviado: false, 
     metodo: 'log-audit', 
-    error: 'Pendiente de configurar clave de API de correo en variables de Cloudflare (ej. RESEND_API_KEY o Send Email binding)' 
+    error: 'No se pudo enviar: revise el binding EMAIL y los destinatarios verificados en Cloudflare' 
   };
 }
