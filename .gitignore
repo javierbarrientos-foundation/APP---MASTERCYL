@@ -32,3 +32,6 @@ data/
 *.db-journal
 *.db-wal
 *.db-shm
+
+# wrangler deployment cache
+.wrangler/

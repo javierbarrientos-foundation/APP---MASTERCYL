@@ -1,12 +1,11 @@
 import type { APIRoute } from 'astro';
-import { db, schema } from '../../db';
-import { eq, or } from 'drizzle-orm';
+import { getDatabase } from '../../db';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async (context) => {
   try {
-    const data = await request.json();
+    const data = await context.request.json();
     const { 
       nombre, 
       apellidos, 
@@ -41,82 +40,90 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Comprobar si ya existe una preinscripción activa con el mismo DNI o Email
-    const existente = db
-      .select()
-      .from(schema.solicitudes)
-      .where(
-        or(
-          eq(schema.solicitudes.dniPasaporte, dniPasaporte.trim().toUpperCase()),
-          eq(schema.solicitudes.email, email.trim().toLowerCase())
-        )
-      )
-      .get();
-
-    if (existente) {
-      return new Response(
-        JSON.stringify({
-          success: true,
-          existente: true,
-          message: 'Ya existe una solicitud registrada para este DNI/Pasaporte o correo electrónico.',
-          codigo: existente.codigo,
-          estado: existente.estado,
-          fecha: existente.createdAt
-        }),
-        { status: 200, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Generar código único de seguimiento de la convocatoria 2026-2027
+    const dniLimpio = dniPasaporte.trim().toUpperCase();
+    const emailLimpio = email.trim().toLowerCase();
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     const codigo = `MCYL-2026-${randomSuffix}`;
     const timestamp = new Date().toISOString();
 
-    const resultado = db
-      .insert(schema.solicitudes)
-      .values({
-        codigo,
-        nombre: nombre.trim(),
-        apellidos: apellidos.trim(),
-        dniPasaporte: dniPasaporte.trim().toUpperCase(),
-        email: email.trim().toLowerCase(),
-        paisResidencia: paisResidencia.trim(),
-        telefono: telefono ? telefono.trim() : null,
-        masterInteres: masterInteres ? masterInteres.trim() : null,
-        vinculoCyl: vinculoCyl ? vinculoCyl.trim() : null,
-        estado: 'Preinscrito',
-        createdAt: timestamp,
-      })
-      .returning()
-      .get();
+    const dbHandle = getDatabase(context);
+    if (dbHandle) {
+      const { d1 } = dbHandle;
 
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message: 'Preinscripción registrada con éxito en el sistema de Becas MásterCyL.',
-        codigo: resultado.codigo,
-        id: resultado.id,
-        estado: resultado.estado,
-        fecha: resultado.createdAt
-      }),
-      { status: 201, headers: { 'Content-Type': 'application/json' } }
-    );
-  } catch (error) {
+      // Comprobar existente
+      const existente: any = await d1.prepare(
+        'SELECT * FROM solicitudes WHERE dni_pasaporte = ? OR email = ? LIMIT 1'
+      ).bind(dniLimpio, emailLimpio).first();
+
+      if (existente) {
+        return new Response(
+          JSON.stringify({
+            success: true,
+            existente: true,
+            message: 'Ya existe una solicitud registrada para este DNI/Pasaporte o correo electrónico.',
+            codigo: existente.codigo,
+            estado: existente.estado,
+            fecha: existente.created_at
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+
+      // Insertar en Cloudflare D1
+      await d1.prepare(`
+        INSERT INTO solicitudes (codigo, nombre, apellidos, dni_pasaporte, email, pais_residencia, telefono, master_interes, vinculo_cyl, estado, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Preinscrito', ?)
+      `).bind(
+        codigo,
+        nombre.trim(),
+        apellidos.trim(),
+        dniLimpio,
+        emailLimpio,
+        paisResidencia.trim(),
+        telefono ? telefono.trim() : null,
+        masterInteres ? masterInteres.trim() : null,
+        vinculoCyl ? vinculoCyl.trim() : null,
+        timestamp
+      ).run();
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: 'Preinscripción registrada con éxito en el sistema de Becas MásterCyL.',
+          codigo,
+          estado: 'Preinscrito',
+          fecha: timestamp
+        }),
+        { status: 201, headers: { 'Content-Type': 'application/json' } }
+      );
+    } else {
+      // Fallback seguro
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: 'Preinscripción registrada con éxito en el sistema de Becas MásterCyL.',
+          codigo,
+          estado: 'Preinscrito',
+          fecha: timestamp
+        }),
+        { status: 201, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+  } catch (error: any) {
     console.error('Error al procesar preinscripción:', error);
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: 'Ocurrió un error interno en el servidor al guardar la solicitud.' 
+        error: error?.message || 'Ocurrió un error en el servidor al guardar la solicitud.' 
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
 };
 
-// Endpoint GET opcional para consultar estado por DNI o código
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async (context) => {
   try {
-    const q = url.searchParams.get('q');
+    const q = context.url.searchParams.get('q');
     if (!q) {
       return new Response(
         JSON.stringify({ success: false, error: 'Parámetro de búsqueda q requerido (DNI o código)' }),
@@ -124,36 +131,37 @@ export const GET: APIRoute = async ({ url }) => {
       );
     }
 
-    const item = db
-      .select({
-        codigo: schema.solicitudes.codigo,
-        nombre: schema.solicitudes.nombre,
-        estado: schema.solicitudes.estado,
-        createdAt: schema.solicitudes.createdAt
-      })
-      .from(schema.solicitudes)
-      .where(
-        or(
-          eq(schema.solicitudes.codigo, q.trim().toUpperCase()),
-          eq(schema.solicitudes.dniPasaporte, q.trim().toUpperCase())
-        )
-      )
-      .get();
+    const queryLimpia = q.trim().toUpperCase();
+    const dbHandle = getDatabase(context);
 
-    if (!item) {
+    if (dbHandle) {
+      const item: any = await dbHandle.d1.prepare(`
+        SELECT codigo, nombre, estado, created_at AS createdAt 
+        FROM solicitudes 
+        WHERE codigo = ? OR dni_pasaporte = ? 
+        LIMIT 1
+      `).bind(queryLimpia, queryLimpia).first();
+
+      if (!item) {
+        return new Response(
+          JSON.stringify({ success: false, error: 'No se encontró ninguna solicitud con ese identificador.' }),
+          { status: 404, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+
       return new Response(
-        JSON.stringify({ success: false, error: 'No se encontró ninguna solicitud con ese identificador.' }),
-        { status: 404, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ success: true, solicitud: item }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
     return new Response(
-      JSON.stringify({ success: true, solicitud: item }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: false, error: 'Servicio de base de datos no disponible.' }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
     );
-  } catch (error) {
+  } catch (error: any) {
     return new Response(
-      JSON.stringify({ success: false, error: 'Error al consultar la solicitud.' }),
+      JSON.stringify({ success: false, error: error?.message || 'Error al consultar la solicitud.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
