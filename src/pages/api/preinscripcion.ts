@@ -53,8 +53,8 @@ export const POST: APIRoute = async (context) => {
 
     const dniLimpio = dniPasaporte.trim().toUpperCase();
     const emailLimpio = email.trim().toLowerCase();
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    const codigo = `MCYL-2026-${randomSuffix}`;
+    // Código de registro no adivinable (8 caracteres hexadecimales aleatorios)
+    const codigo = `MCYL-2026-${crypto.randomUUID().replace(/-/g, '').slice(0, 8).toUpperCase()}`;
     const timestamp = new Date().toISOString();
     const datosJson = JSON.stringify(data);
 
@@ -68,17 +68,15 @@ export const POST: APIRoute = async (context) => {
       ).bind(dniLimpio, emailLimpio).first();
 
       if (existente) {
+        // Seguridad (RGPD): nunca devolver datos de una solicitud ya registrada.
+        // Cualquiera que conozca un DNI o un correo podría obtener datos personales ajenos.
         return new Response(
           JSON.stringify({
-            success: true,
+            success: false,
             existente: true,
-            message: 'Ya existe una solicitud registrada para este DNI/Pasaporte o correo electrónico.',
-            codigo: existente.codigo,
-            estado: existente.estado,
-            fecha: existente.created_at,
-            datos: existente.datos_completos ? JSON.parse(existente.datos_completos) : existente
+            error: 'Ya existe una solicitud registrada con este DNI/Pasaporte o correo electrónico. Si necesitas modificarla o consultar su estado, escribe a fonseca@usal.es indicando tu nombre completo.'
           }),
-          { status: 200, headers: { 'Content-Type': 'application/json' } }
+          { status: 409, headers: { 'Content-Type': 'application/json' } }
         );
       }
 
@@ -149,17 +147,14 @@ export const POST: APIRoute = async (context) => {
         { status: 201, headers: { 'Content-Type': 'application/json' } }
       );
     } else {
-      // Fallback seguro
+      // Sin base de datos no se puede guardar la solicitud: avisar en lugar de simular un registro.
+      console.error('Base de datos D1 no disponible: solicitud NO registrada.');
       return new Response(
         JSON.stringify({
-          success: true,
-          message: 'Solicitud registrada en modo seguro.',
-          codigo,
-          estado: 'Preinscrito',
-          fecha: timestamp,
-          datos: data
+          success: false,
+          error: 'El sistema de registro no está disponible en este momento. Inténtalo de nuevo más tarde.'
         }),
-        { status: 201, headers: { 'Content-Type': 'application/json' } }
+        { status: 503, headers: { 'Content-Type': 'application/json' } }
       );
     }
   } catch (error: any) {
@@ -167,7 +162,7 @@ export const POST: APIRoute = async (context) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error?.message || 'Ocurrió un error en el servidor al registrar la solicitud.' 
+        error: 'Ocurrió un error en el servidor al registrar la solicitud.' 
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
