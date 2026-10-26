@@ -148,7 +148,7 @@ export const POST: APIRoute = async (context) => {
 
     const { d1 } = dbHandle;
 
-    await d1.prepare(`
+    const result = await d1.prepare(`
       INSERT INTO inscripciones (
         fecha_registro,
         nombre_apellidos,
@@ -182,11 +182,15 @@ export const POST: APIRoute = async (context) => {
       urlCuenta
     ).run();
 
+    const insertId = (result as any)?.meta?.last_row_id;
+    const codigoRegistro = `INSC-${new Date().getFullYear()}-${String(insertId || Math.floor(1000 + Math.random() * 9000)).padStart(4, '0')}`;
+
     // Despacho de correo con enlaces limpios a Cloudflare R2
     try {
       await enviarNotificacion({
         tipo: 'inscripcion',
         datos: {
+          codigo: codigoRegistro,
           nombreApellidos,
           correo,
           telefono,
@@ -213,6 +217,8 @@ export const POST: APIRoute = async (context) => {
     return new Response(
       JSON.stringify({
         success: true,
+        id: insertId,
+        codigo: codigoRegistro,
         message: '¡Tu inscripción y documentación oficial han sido registradas con éxito en el sistema de la Fundación General (FGUSAL)!',
         fecha: fechaRegistro
       }),
