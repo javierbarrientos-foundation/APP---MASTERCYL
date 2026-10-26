@@ -9,6 +9,24 @@ export const usuarios = sqliteTable('usuarios', {
   createdAt: text('created_at').notNull(),
 });
 
+export const inscripciones = sqliteTable('inscripciones', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  fechaRegistro: text('fecha_registro').notNull(),
+  nombreApellidos: text('nombre_apellidos').notNull(),
+  correo: text('correo').notNull(),
+  telefono: text('telefono').notNull(),
+  vinculoCyl: text('vinculo_cyl').notNull(),
+  archivoImpreso: text('archivo_impreso').notNull(),
+  archivoVinculo: text('archivo_vinculo').notNull(),
+  archivoResidencia: text('archivo_residencia'),
+  archivoTitulo: text('archivo_titulo').notNull(),
+  archivoMatricula: text('archivo_matricula').notNull(),
+  archivoMeritoAsociacion: text('archivo_merito_asociacion'),
+  archivoMeritoExpediente: text('archivo_merito_expediente'),
+  archivoMeritoRenta: text('archivo_merito_renta'),
+  archivoCuentaCorriente: text('archivo_cuenta_corriente').notNull(),
+});
+
 export const solicitudes = sqliteTable('solicitudes', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   codigo: text('codigo').notNull().unique(),
@@ -45,6 +63,8 @@ export const mensajesContacto = sqliteTable('mensajes_contacto', {
 
 export type Usuario = typeof usuarios.$inferSelect;
 export type NuevoUsuario = typeof usuarios.$inferInsert;
+export type Inscripcion = typeof inscripciones.$inferSelect;
+export type NuevaInscripcion = typeof inscripciones.$inferInsert;
 export type Solicitud = typeof solicitudes.$inferSelect;
 export type NuevaSolicitud = typeof solicitudes.$inferInsert;
 export type MensajeContacto = typeof mensajesContacto.$inferSelect;

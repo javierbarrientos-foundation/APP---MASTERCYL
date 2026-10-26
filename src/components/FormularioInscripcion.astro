@@ -1,0 +1,748 @@
+---
+/**
+ * Componente oficial de Inscripción y Subida Documental a Cloudflare R2
+ * Convocatoria Becas MásterCyL 2026-2027 (FGUSAL / Junta de Castilla y León)
+ */
+---
+
+<dialog id="modal-inscripcion" class="modal-dialog" aria-labelledby="modal-inscripcion-titulo">
+  <div class="modal-contenedor">
+    <!-- Botón de Cerrar -->
+    <button type="button" id="btn-cerrar-modal-inscripcion" class="modal-btn-cerrar" aria-label="Cerrar formulario de inscripción">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <!-- Encabezado Institucional -->
+    <div class="modal-cabecera-oficial">
+      <div class="modal-logos-wrap">
+        <img src="/img/logo-jcyl.png" alt="Junta de Castilla y León" class="logo-modal" />
+        <img src="/img/logo-fgusal.png" alt="Fundación General de la Universidad de Salamanca" class="logo-modal" />
+      </div>
+      <div class="modal-titulos">
+        <span class="badge-convocatoria">Convocatoria Oficial 2026-2027</span>
+        <h2 id="modal-inscripcion-titulo" class="modal-titulo-principal">
+          Formulario Oficial de Inscripción y Entrega Documental
+        </h2>
+        <p class="modal-subtitulo-programa">
+          Programa «MásterCyL» · Becas de Postgrado en la Universidad de Salamanca
+        </p>
+      </div>
+    </div>
+
+    <!-- PASO 1 y PASO 2: Bloque Superior de Instrucciones -->
+    <div class="bloque-instrucciones">
+      <div class="instruccion-item">
+        <div class="instruccion-numero">1</div>
+        <div class="instruccion-texto">
+          <strong>Paso 1:</strong> Descarga y revisa los 
+          <a href="/Documentos_presentar.pdf" target="_blank" rel="noopener noreferrer" class="link-documento">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+            Documentos a presentar (PDF)
+          </a> 
+          y el 
+          <a href="/impreso_solicitud_2026.pdf" target="_blank" rel="noopener noreferrer" class="link-documento">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+            Impreso de Solicitud (PDF)
+          </a>.
+        </div>
+      </div>
+      <div class="instruccion-item">
+        <div class="instruccion-numero">2</div>
+        <div class="instruccion-texto">
+          <strong>Paso 2:</strong> Rellena el siguiente formulario y adjunta la documentación firmada en formato PDF o imagen legible.
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULARIO DE INSCRIPCIÓN MULTIPART -->
+    <form id="form-inscripcion-oficial" method="POST" enctype="multipart/form-data" class="form-oficial">
+      
+      <!-- SECCIÓN A: DATOS PERSONALES -->
+      <div class="form-seccion-bloque">
+        <h3 class="form-seccion-titulo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          1. Datos de la Persona Solicitante
+        </h3>
+
+        <div class="form-grid-3">
+          <!-- Nombre y apellidos -->
+          <div class="form-grupo">
+            <label for="insc-nombre" class="form-label">
+              <span>Nombre y apellidos completos:</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="text" id="insc-nombre" name="nombre_apellidos" class="form-input" placeholder="Ej. Juan Carlos Pérez Gómez" required autocomplete="name" />
+          </div>
+
+          <!-- Correo electrónico -->
+          <div class="form-grupo">
+            <label for="insc-correo" class="form-label">
+              <span>Correo electrónico:</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="email" id="insc-correo" name="correo" class="form-input" placeholder="tu.correo@ejemplo.com" required autocomplete="email" />
+          </div>
+
+          <!-- Teléfono -->
+          <div class="form-grupo">
+            <label for="insc-telefono" class="form-label">
+              <span>Teléfono de contacto:</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="tel" id="insc-telefono" name="telefono" class="form-input" placeholder="+34 600 000 000 / +54 9 11..." required autocomplete="tel" />
+          </div>
+        </div>
+
+        <!-- Selector de Vínculo con CyL -->
+        <div class="form-grupo" style="margin-top: 1.25rem;">
+          <label class="form-label">
+            <span>¿Cuál es tu vínculo con Castilla y León?</span>
+            <span class="req">* Selecciona una opción</span>
+          </label>
+          <div class="opciones-vinculo-grid">
+            <label class="radio-card">
+              <input type="radio" name="vinculo_cyl" value="1. Nacido en CyL" required checked />
+              <div class="radio-card__cuerpo">
+                <strong>1. Nacido en Castilla y León</strong>
+                <span>Nacimiento acreditado en cualquier municipio de Castilla y León.</span>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="vinculo_cyl" value="2. Residente 10 años" required />
+              <div class="radio-card__cuerpo">
+                <strong>2. Residente durante 10 años continuados</strong>
+                <span>Empadronamiento histórico continuado durante al menos diez años.</span>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="vinculo_cyl" value="3. Descendiente nacido en CyL" required />
+              <div class="radio-card__cuerpo">
+                <strong>3. Descendiente de nacido en CyL</strong>
+                <span>Hijo/a o nieto/a de persona nacida en Castilla y León.</span>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="vinculo_cyl" value="4. Descendiente residente 10 años" required />
+              <div class="radio-card__cuerpo">
+                <strong>4. Descendiente de residente 10 años</strong>
+                <span>Hijo/a o nieto/a de residente continuado durante diez años en CyL.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN B: DOCUMENTACIÓN OBLIGATORIA (R2) -->
+      <div class="form-seccion-bloque">
+        <h3 class="form-seccion-titulo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          2. Documentación Obligatoria Requerida
+        </h3>
+
+        <div class="archivos-grid">
+          <!-- 1. Impreso de solicitud rellenado y firmado -->
+          <div class="form-grupo-archivo">
+            <label for="file-impreso" class="archivo-label">
+              <span class="archivo-titulo">1. Impreso de solicitud rellenado y firmado</span>
+              <span class="badge-req">Requerido</span>
+            </label>
+            <p class="archivo-desc">Sube aquí el impreso oficial debidamente cumplimentado y firmado con firma manuscrita o electrónica.</p>
+            <input type="file" id="file-impreso" name="archivo_impreso" accept=".pdf,.jpg,.jpeg,.png" required class="input-archivo" />
+          </div>
+
+          <!-- 2. Documentación del vínculo -->
+          <div class="form-grupo-archivo">
+            <label for="file-vinculo" class="archivo-label">
+              <span class="archivo-titulo">2. Acreditación del vínculo seleccionado</span>
+              <span class="badge-req">Requerido</span>
+            </label>
+            <p class="archivo-desc">DNI con lugar de nacimiento, certificado histórico de empadronamiento o libro de familia para descendientes.</p>
+            <input type="file" id="file-vinculo" name="archivo_vinculo" accept=".pdf,.jpg,.jpeg,.png" required class="input-archivo" />
+          </div>
+
+          <!-- 3. Título de acceso al máster -->
+          <div class="form-grupo-archivo">
+            <label for="file-titulo" class="archivo-label">
+              <span class="archivo-titulo">3. Título universitario de acceso al máster</span>
+              <span class="badge-req">Requerido</span>
+            </label>
+            <p class="archivo-desc">Título de Grado, Licenciatura o equivalente que otorga acceso a estudios de postgrado en la USAL.</p>
+            <input type="file" id="file-titulo" name="archivo_titulo" accept=".pdf,.jpg,.jpeg,.png" required class="input-archivo" />
+          </div>
+
+          <!-- 4. Resguardo de matrícula -->
+          <div class="form-grupo-archivo">
+            <label for="file-matricula" class="archivo-label">
+              <span class="archivo-titulo">4. Resguardo de matrícula o acreditación de secretaría</span>
+              <span class="badge-req">Requerido</span>
+            </label>
+            <p class="archivo-desc">Justificante oficial de matrícula en máster presencial de al menos 60 créditos ECTS en la Universidad de Salamanca (curso 2026-2027).</p>
+            <input type="file" id="file-matricula" name="archivo_matricula" accept=".pdf,.jpg,.jpeg,.png" required class="input-archivo" />
+          </div>
+
+          <!-- 5. Cuenta corriente en España -->
+          <div class="form-grupo-archivo">
+            <label for="file-cuenta" class="archivo-label">
+              <span class="archivo-titulo">5. Cuenta corriente en España: certificado bancario</span>
+              <span class="badge-req">Requerido</span>
+            </label>
+            <p class="archivo-desc">Certificado de titularidad bancaria en España donde figure el código IBAN y el solicitante como titular.</p>
+            <input type="file" id="file-cuenta" name="archivo_cuenta_corriente" accept=".pdf,.jpg,.jpeg,.png" required class="input-archivo" />
+          </div>
+
+          <!-- 6. Residencia en Hispanoamérica (Opcional) -->
+          <div class="form-grupo-archivo">
+            <label for="file-residencia" class="archivo-label">
+              <span class="archivo-titulo">6. Residencia en Hispanoamérica</span>
+              <span class="badge-opc">Opcional</span>
+            </label>
+            <p class="archivo-desc">Certificado consular, inscripción en el RERE/PERE o documento oficial acreditativo de residencia en Hispanoamérica.</p>
+            <input type="file" id="file-residencia" name="archivo_residencia" accept=".pdf,.jpg,.jpeg,.png" class="input-archivo" />
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN C: MÉRITOS BAREMABLES (OPCIONALES) -->
+      <div class="form-seccion-bloque">
+        <h3 class="form-seccion-titulo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          3. Documentación para Baremación de Méritos (Opcional)
+        </h3>
+
+        <div class="archivos-grid">
+          <!-- Mérito Asociación -->
+          <div class="form-grupo-archivo">
+            <label for="file-merito-asoc" class="archivo-label">
+              <span class="archivo-titulo">Asociación comunidades CyL en el exterior</span>
+              <span class="badge-opc">Hasta 10 pts</span>
+            </label>
+            <p class="archivo-desc">Certificado oficial de antigüedad emitido por la casa o centro de Castilla y León reconocida en el exterior.</p>
+            <input type="file" id="file-merito-asoc" name="archivo_merito_asociacion" accept=".pdf,.jpg,.jpeg,.png" class="input-archivo" />
+          </div>
+
+          <!-- Mérito Expediente -->
+          <div class="form-grupo-archivo">
+            <label for="file-merito-exp" class="archivo-label">
+              <span class="archivo-titulo">Expediente académico con nota media</span>
+              <span class="badge-opc">Hasta 20 pts</span>
+            </label>
+            <p class="archivo-desc">Certificado de notas oficial con créditos superados y declaración de equivalencia de nota media ministerial.</p>
+            <input type="file" id="file-merito-exp" name="archivo_merito_expediente" accept=".pdf,.jpg,.jpeg,.png" class="input-archivo" />
+          </div>
+
+          <!-- Mérito Renta -->
+          <div class="form-grupo-archivo">
+            <label for="file-merito-renta" class="archivo-label">
+              <span class="archivo-titulo">Renta familiar del ejercicio 2025</span>
+              <span class="badge-opc">Hasta 4 pts</span>
+            </label>
+            <p class="archivo-desc">Declaración fiscal de ingresos de la unidad familiar correspondiente al ejercicio 2025 para baremación de menor renta.</p>
+            <input type="file" id="file-merito-renta" name="archivo_merito_renta" accept=".pdf,.jpg,.jpeg,.png" class="input-archivo" />
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN D: PROTECCIÓN DE DATOS Y TURNSTILE -->
+      <div class="form-seccion-bloque">
+        <div class="tabla-rgpd-resumen">
+          <div class="rgpd-resumen-header">INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS</div>
+          <p style="margin: 0.5rem 0 0.25rem 0; font-size: 0.85rem; color: #475569; line-height: 1.5;">
+            <strong>Responsables:</strong> Fundación General de la Universidad de Salamanca (FGUSAL) y Consejería de la Presidencia de la Junta de Castilla y León en régimen de corresponsabilidad.
+            <strong>Finalidad:</strong> Tramitación y baremación de la convocatoria de Becas MásterCyL.
+            <strong>Custodia:</strong> Almacenamiento seguro en Cloudflare R2 bajo jurisdicción de la Unión Europea (RGPD UE 2016/679).
+            <strong>Derechos:</strong> Acceso, rectificación y supresión mediante correo a <a href="mailto:info@fundacionusal.es" style="color: #8A1528; text-decoration: underline;">info@fundacionusal.es</a>.
+          </p>
+        </div>
+
+        <div class="form-privacidad-check" style="margin-top: 1rem; padding: 1rem 1.25rem; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" id="insc-check-privacidad" name="politica_privacidad" required style="margin-top: 0.25rem;" />
+            <span style="font-size: 0.875rem; color: #1e293b; line-height: 1.5;">
+              He leído y acepto la <a href="/privacidad" target="_blank" style="color: #8A1528; text-decoration: underline; font-weight: 600;">Política de Privacidad</a> y consiento el tratamiento de mis datos y documentación oficial para la instrucción del procedimiento de concesión de la beca. <strong style="color: #dc2626;">* Obligatorio</strong>
+            </span>
+          </label>
+        </div>
+
+        <!-- Widget Cloudflare Turnstile -->
+        <div class="turnstile-container" style="margin-top: 1.25rem; display: flex; justify-content: center;">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAAxxxxxxxxxxxxxx" data-theme="light"></div>
+        </div>
+      </div>
+
+      <!-- BOTÓN DE ENVÍO -->
+      <div class="form-acciones">
+        <button type="submit" id="btn-submit-inscripcion" class="form-btn-submit">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Enviar Inscripción Oficial</span>
+        </button>
+      </div>
+
+      <div id="resultado-inscripcion" class="resultado-caja" style="display: none;"></div>
+    </form>
+  </div>
+</dialog>
+
+<style>
+  .modal-dialog {
+    border: none;
+    background: transparent;
+    max-width: 920px;
+    width: 95%;
+    margin: auto;
+    padding: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .modal-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .modal-contenedor {
+    background: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2.75rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 40px -15px rgba(138, 21, 40, 0.15);
+  }
+
+  .modal-contenedor::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #8A1528 0%, #D4AF37 50%, #8A1528 100%);
+  }
+
+  .modal-btn-cerrar {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #F1F5F9;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .modal-btn-cerrar:hover {
+    background: #E2E8F0;
+    color: #0F172A;
+    transform: scale(1.05);
+  }
+
+  .modal-cabecera-oficial {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .modal-logos-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .logo-modal {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .badge-convocatoria {
+    display: inline-block;
+    background: rgba(138, 21, 40, 0.08);
+    color: #8A1528;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-titulo-principal {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1.25;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .modal-subtitulo-programa {
+    font-size: 0.95rem;
+    color: #64748B;
+    margin: 0;
+  }
+
+  /* Bloque de Instrucciones */
+  .bloque-instrucciones {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-left: 4px solid #8A1528;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .instruccion-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .instruccion-numero {
+    background: #8A1528;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .instruccion-texto {
+    font-size: 0.925rem;
+    color: #334155;
+    line-height: 1.5;
+  }
+
+  .link-documento {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #0284C7;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin: 0 0.15rem;
+  }
+
+  .link-documento:hover {
+    color: #0369A1;
+  }
+
+  /* Secciones del formulario */
+  .form-oficial {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .form-seccion-bloque {
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.75rem;
+    background: #FFFFFF;
+  }
+
+  .form-seccion-titulo {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid #F1F5F9;
+    padding-bottom: 0.75rem;
+  }
+
+  .form-seccion-titulo svg {
+    color: #8A1528;
+  }
+
+  .form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .form-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1E293B;
+  }
+
+  .req {
+    color: #DC2626;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.925rem;
+    border: 1.5px solid #CBD5E1;
+    border-radius: var(--radius-md);
+    background: #FFFFFF;
+    color: #0F172A;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #8A1528;
+    box-shadow: 0 0 0 3px rgba(138, 21, 40, 0.12);
+  }
+
+  /* Opciones de vínculo */
+  .opciones-vinculo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .radio-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    background: #F8FAFC;
+    transition: all 0.2s ease;
+  }
+
+  .radio-card:hover {
+    border-color: #CBD5E1;
+    background: #F1F5F9;
+  }
+
+  .radio-card:has(input:checked) {
+    border-color: #8A1528;
+    background: rgba(138, 21, 40, 0.04);
+  }
+
+  .radio-card input {
+    margin-top: 0.25rem;
+    accent-color: #8A1528;
+  }
+
+  .radio-card__cuerpo strong {
+    display: block;
+    font-size: 0.875rem;
+    color: #0F172A;
+    margin-bottom: 0.2rem;
+  }
+
+  .radio-card__cuerpo span {
+    font-size: 0.775rem;
+    color: #64748B;
+    line-height: 1.4;
+    display: block;
+  }
+
+  /* Grid de Archivos */
+  .archivos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .form-grupo-archivo {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    padding: 1.15rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .archivo-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .archivo-titulo {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .badge-req {
+    background: #FEE2E2;
+    color: #991B1B;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .badge-opc {
+    background: #E0F2FE;
+    color: #075985;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .archivo-desc {
+    font-size: 0.785rem;
+    color: #64748B;
+    margin: 0 0 0.85rem 0;
+    line-height: 1.4;
+  }
+
+  .input-archivo {
+    font-size: 0.825rem;
+    color: #334155;
+    file-selector-button: {
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid #CBD5E1;
+      background: #FFFFFF;
+      color: #0F172A;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 0.75rem;
+      transition: background 0.2s;
+    }
+  }
+
+  .input-archivo::file-selector-button {
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid #CBD5E1;
+    background: #FFFFFF;
+    color: #0F172A;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    transition: background 0.2s;
+  }
+
+  .input-archivo::file-selector-button:hover {
+    background: #F1F5F9;
+  }
+
+  .tabla-rgpd-resumen {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+  }
+
+  .rgpd-resumen-header {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .form-acciones {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .form-btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #8A1528;
+    color: #FFFFFF;
+    border: none;
+    padding: 1.15rem 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(138, 21, 40, 0.35);
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .form-btn-submit:hover:not(:disabled) {
+    background: #700f20;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 21, 40, 0.45);
+  }
+
+  .form-btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .resultado-caja {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .resultado-caja--exito {
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
+    color: #166534;
+  }
+
+  .resultado-caja--error {
+    background: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    color: #991B1B;
+  }
+
+  @media (max-width: 768px) {
+    .modal-contenedor {
+      padding: 1.75rem 1.25rem;
+    }
+    .modal-titulo-principal {
+      font-size: 1.35rem;
+    }
+    .archivos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

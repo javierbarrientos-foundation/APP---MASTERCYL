@@ -1,3 +1,21 @@
+CREATE TABLE IF NOT EXISTS inscripciones (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  fecha_registro TEXT NOT NULL,
+  nombre_apellidos TEXT NOT NULL,
+  correo TEXT NOT NULL,
+  telefono TEXT NOT NULL,
+  vinculo_cyl TEXT NOT NULL,
+  archivo_impreso TEXT NOT NULL,
+  archivo_vinculo TEXT NOT NULL,
+  archivo_residencia TEXT,
+  archivo_titulo TEXT NOT NULL,
+  archivo_matricula TEXT NOT NULL,
+  archivo_merito_asociacion TEXT,
+  archivo_merito_expediente TEXT,
+  archivo_merito_renta TEXT,
+  archivo_cuenta_corriente TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS usuarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   email TEXT NOT NULL UNIQUE,
