@@ -2,12 +2,6 @@ name = "mastercyl"
 compatibility_date = "2026-10-23"
 account_id = "a7200c79df411d172ad20388623d0cd0"
 
-[[d1_databases]]
-binding = "DB"
-database_name = "mastercyl"
-database_id = "3be4fdc9-8b6a-422c-a979-30bc7b2b4211"
-migrations_dir = "migrations"
-
 [[r2_buckets]]
 binding = "BUCKET_ARCHIVOS"
 bucket_name = "mastercyl-archivos"
