@@ -305,7 +305,7 @@ import FormularioInscripcion from '../components/FormularioInscripcion.astro';
                   </div>
                   <div style="padding: 1.25rem; background: #ffffff; border-radius: 8px; border: 1.5px solid #86EFAC; margin-top: 0.75rem;">
                     <div><strong>Identificador de Solicitud:</strong> <span style="font-family: monospace; font-size: 1.15rem; color: #9E1B32; font-weight: 800;">#${data.id || 'REG-' + Date.now()}</span></div>
-                    <div style="margin-top: 0.5rem; color: #334155;"><strong>Documentación:</strong> Almacenada de forma segura en Cloudflare R2.</div>
+                    <div style="margin-top: 0.5rem; color: #334155;"><strong>Documentación:</strong> Tu documentación se ha recibido correctamente.</div>
                     <div style="margin-top: 0.35rem; color: #334155;"><strong>Notificación:</strong> Se ha remitido el expediente con los enlaces de descarga al correo de administración.</div>
                     <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.75rem; line-height: 1.45;">
                       Guarda este comprobante. Nos pondremos en contacto contigo a través del correo electrónico facilitado durante el periodo de baremación.
@@ -347,12 +347,16 @@ import FormularioInscripcion from '../components/FormularioInscripcion.astro';
           e.preventDefault();
           const submitBtn = formContacto.querySelector('button[type="submit"]');
 
+          const turnstileInput = formContacto.querySelector('[name="cf-turnstile-response"]');
+          const turnstileToken = turnstileInput ? (turnstileInput as HTMLInputElement).value : '';
+
           const payload = {
-            nombre: document.getElementById('nombre-contacto')?.value,
-            email: document.getElementById('email-contacto')?.value,
-            pais: document.getElementById('pais-contacto')?.value,
-            asunto: document.getElementById('asunto-contacto')?.value,
-            mensaje: document.getElementById('mensaje-contacto')?.value,
+            nombre: (document.getElementById('nombre-contacto') as HTMLInputElement)?.value,
+            email: (document.getElementById('email-contacto') as HTMLInputElement)?.value,
+            pais: (document.getElementById('pais-contacto') as HTMLInputElement)?.value,
+            asunto: (document.getElementById('asunto-contacto') as HTMLInputElement)?.value,
+            mensaje: (document.getElementById('mensaje-contacto') as HTMLTextAreaElement)?.value,
+            'cf-turnstile-response': turnstileToken,
           };
 
           if (submitBtn) {

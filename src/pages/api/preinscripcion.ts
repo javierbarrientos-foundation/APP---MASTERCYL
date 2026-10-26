@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { getDatabase } from '../../db';
 import { enviarNotificacion } from '../../utils/mailer';
+import { verificarTurnstile } from '../../utils/turnstile';
 
 export const prerender = false;
 
@@ -10,7 +11,51 @@ const CONVOCATORIA_EN_PRUEBAS_BLOQUEADA = false;
 
 export const POST: APIRoute = async (context) => {
   try {
-    const data = await context.request.json();
+    let data: any = {};
+    let turnstileToken = '';
+
+    const contentType = context.request.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      data = await context.request.json().catch(() => ({}));
+      turnstileToken = data['cf-turnstile-response'] || '';
+    } else {
+      const formData = await context.request.formData();
+      turnstileToken = String(formData.get('cf-turnstile-response') || '');
+      data = {
+        nombre: formData.get('nombre'),
+        apellidos: formData.get('apellidos'),
+        dniPasaporte: formData.get('dniPasaporte') || formData.get('dni_pasaporte'),
+        email: formData.get('email'),
+        paisResidencia: formData.get('paisResidencia') || formData.get('pais_residencia') || '',
+        telefono: formData.get('telefono') || '',
+        vinculoCyl: formData.get('vinculoCyl') || formData.get('vinculo_cyl') || '',
+        direccionHispanoamerica: formData.get('direccionHispanoamerica') || formData.get('direccion_hispanoamerica') || '',
+        direccionCyl: formData.get('direccionCyl') || formData.get('direccion_cyl') || '',
+        titulacionAcceso: formData.get('titulacionAcceso') || formData.get('titulacion_acceso') || '',
+        masterInteres: formData.get('masterInteres') || formData.get('master_interes') || '',
+        masterOpcion2: formData.get('masterOpcion2') || formData.get('master_opcion_2') || '',
+        masterOpcion3: formData.get('masterOpcion3') || formData.get('master_opcion_3') || '',
+        cuentaBancaria: formData.get('cuentaBancaria') || formData.get('cuenta_bancaria') || '',
+        composicionFamiliar: formData.get('composicionFamiliar') || formData.get('composicion_familiar') || '',
+        politicaPrivacidad: formData.get('politicaPrivacidad') === 'true' || formData.get('politica_privacidad') === 'true' || formData.get('politica_privacidad') === 'on',
+      };
+    }
+
+    // Verificación de Cloudflare Turnstile
+    const secretKey = (context.locals as any)?.env?.TURNSTILE_SECRET_KEY || (context.locals as any)?.runtime?.env?.TURNSTILE_SECRET_KEY;
+    const clientIp = context.request.headers.get('cf-connecting-ip') || undefined;
+    const esTurnstileValido = await verificarTurnstile(turnstileToken, secretKey, clientIp);
+
+    if (!esTurnstileValido) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: 'Error de verificación de seguridad Turnstile. Por favor, verifica el captcha e inténtalo de nuevo.' 
+        }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
     const { 
       nombre, 
       apellidos, 

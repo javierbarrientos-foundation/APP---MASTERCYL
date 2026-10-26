@@ -2,13 +2,52 @@ import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { getDatabase } from '../../db';
 import { enviarNotificacion } from '../../utils/mailer';
+import { verificarTurnstile } from '../../utils/turnstile';
 
 export const prerender = false;
 
 export const POST: APIRoute = async (context) => {
   try {
-    const data = await context.request.json();
-    const { nombre, email, pais, asunto, mensaje } = data;
+    let turnstileToken = '';
+    let nombre = '';
+    let email = '';
+    let pais = '';
+    let asunto = '';
+    let mensaje = '';
+
+    const contentType = context.request.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      const data = await context.request.json().catch(() => ({}));
+      turnstileToken = data['cf-turnstile-response'] || '';
+      nombre = data.nombre || '';
+      email = data.email || '';
+      pais = data.pais || '';
+      asunto = data.asunto || '';
+      mensaje = data.mensaje || '';
+    } else {
+      const formData = await context.request.formData();
+      turnstileToken = String(formData.get('cf-turnstile-response') || '');
+      nombre = String(formData.get('nombre') || '');
+      email = String(formData.get('email') || '');
+      pais = String(formData.get('pais') || '');
+      asunto = String(formData.get('asunto') || '');
+      mensaje = String(formData.get('mensaje') || '');
+    }
+
+    // Verificación de Cloudflare Turnstile
+    const secretKey = (context.locals as any)?.env?.TURNSTILE_SECRET_KEY || (context.locals as any)?.runtime?.env?.TURNSTILE_SECRET_KEY;
+    const clientIp = context.request.headers.get('cf-connecting-ip') || undefined;
+    const esTurnstileValido = await verificarTurnstile(turnstileToken, secretKey, clientIp);
+
+    if (!esTurnstileValido) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: 'Error de verificación de seguridad Turnstile. Por favor, verifica el captcha e inténtalo de nuevo.' 
+        }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Validación de campos
     if (!nombre || !email || !pais || !asunto || !mensaje) {
