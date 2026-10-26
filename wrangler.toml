@@ -1,6 +1,6 @@
 name = "mastercyl"
 compatibility_date = "2026-10-23"
-account_id = "a7200c79df411d172ad20388623d0cd0"
+account_id = "7cb4986d4961ad506156b77de956207b"
 
 [[d1_databases]]
 binding = "DB"
