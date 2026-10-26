@@ -82,7 +82,7 @@ export const POST: APIRoute = async (context) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error?.message || 'Ocurrió un error en el servidor al enviar el mensaje.' 
+        error: 'Ocurrió un error en el servidor al enviar el mensaje.' 
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
